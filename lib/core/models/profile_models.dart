@@ -4,30 +4,69 @@ List<ProfileModel> profileModelFromJson(String str) => List<ProfileModel>.from(j
 
 class ProfileModel {
   ProfileModel({
-    this.nama,
-    this.telp,
-    this.biaya,
-    this.deskripsi,
-    this.alamat,
-    this.gambar,
-    this.createdAt,
+    this.aplications, [
+      this.logo,
+      this.name,
+      this.other,
+      this.psw,
+      this.user
+    ],
+    this.department,
+    this.dni,
+    this.email,
+    this.fileName,
+    this.funcion,
+    this.id,
+    this.image,
+    this.name,
+    this.password,
+    this.surname,
+    this.territorial,
+    this.type,
+    this.userName,
   });
 
-  String nama;
-  String telp;
-  String biaya;
-  String deskripsi;
-  String alamat;
-  String gambar;
-  DateTime createdAt;
+  
+  [String] aplications;
+  String logo;
+  String name;
+  String other;
+  String psw;
+  String user;
+  String department;
+  String dni;
+  String email;
+  String fileName;
+  String funcion;
+  Integer id;
+  String image;
+  String name;
+  String password;
+  String surname;
+  String territorial;
+  String type;
+  String userName;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-        nama: json["nama"],
-        telp: json["telp"],
-        biaya: json["biaya"],
-        deskripsi: json["deskripsi"],
-        alamat: json["alamat"],
-        gambar: json["gambar"],
-        createdAt: DateTime.parse(json["created_at"]),
+        aplications: Object.parse(
+          logo: json["logo"],
+          name: json["name"],
+          other: json["other"],
+          psw: json["psw"],
+          user: json["user"],
+        )        
+        department: json["department"],
+        dni: json["dni"],
+        email: json["email"],
+        fileName: json["fileName"],
+        funcion: json["funcion"],
+        id: json["id"],
+        image: json["image"],
+        name: json["name"],
+        password: json["password"],
+        surname: json["surname"],
+        territorial: json["territorial"],
+        type: json["type"],
+        userName: json["userName"],
       );
 }

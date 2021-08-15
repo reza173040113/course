@@ -58,7 +58,7 @@ class CourseService extends BaseService {
     }
   }
   Future getTrainingPassport() async {
-    Response resp = await dio.get(baseUrl + "/api/v2/me/training_passport/${idUser}");
+    Response resp = await dio.get(baseUrl + "/api/v2/me/training_passport/$idUser");
     if (resp.statusCode == 200) {
       return passportModelFromJson(resp.data);
     }
