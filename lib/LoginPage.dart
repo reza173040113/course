@@ -159,7 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.fromLTRB(24.0, 48.0, 24.0, 8.0),
                   child: MaterialButton(
                     onPressed: () {
-                      _navigeteToNextScreen(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(dni: dni)));
+                      // _navigeteToNextScreen(context);
                     },
                     child: Text(
                       "Entrar",

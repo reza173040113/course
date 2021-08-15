@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
+import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,46 +55,139 @@ class _HomePageState extends State<HomePage> {
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
 
-            body: Container(
-              margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      "images/m_logo.png",
-                      width: 120.0,
-                      height: 120.0,
-                    ),
-                    Container(
-                        child: Row(
+            body: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          color: Colors.white,
-                          icon: Image.asset('images/tutor_icon_white.png'),
-                          onPressed: () {
-                            navigateToNextScreen(context);
-                          },
+                        Image.asset(
+                          "images/m_logo.png",
+                          width: 120.0,
+                          height: 120.0,
                         ),
-                        IconButton(
-                          color: Colors.white,
-                          icon: Icon(Icons.notifications),
-                          onPressed: () {
-                            navigateToNextScreen(context);
-                          },
-                        ),
-                        IconButton(
-                          color: Colors.white,
-                          icon: Image.asset('images/profile.png'),
-                          onPressed: () {
-                            navigateToProfileScreen(context);
-                          },
-                        ),
+                        Container(
+                            child: Row(
+                          children: [
+                            IconButton(
+                              color: Colors.white,
+                              icon: Image.asset('images/tutor_icon_white.png'),
+                              onPressed: () {
+                                navigateToNextScreen(context);
+                              },
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(Icons.notifications),
+                              onPressed: () {
+                                navigateToNextScreen(context);
+                              },
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Image.asset('images/profile.png'),
+                              onPressed: () {
+                                navigateToProfileScreen(context);
+                              },
+                            ),
+                          ],
+                        )),
                       ],
-                    ))
-                  ],
+                    ),
+                  ),
                 ),
-              ),
+                Stack(children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextFormField(
+                      cursorColor: Colors.white,
+                      obscureText: true,
+                      style: TextStyle(color: Colors.white),
+                      decoration: new InputDecoration(
+                        labelText: "Search",
+                        labelStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 20.0,
+                        ),
+                        errorStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: new OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      validator: (input) {
+                        if (input.length == 0) {
+                          return "Search cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.text,
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(right: 30),
+                    child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: IconButton(
+                            icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ))),
+                  )
+                ]),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin:EdgeInsets.only(top:10),
+                              child: Text("Liga Leonizate",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: Colors.white,
+                                  )))
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+
+                NewsPage(),
+              ],
             ),
 
             //TODO: bg
@@ -127,7 +221,7 @@ class _HomePageState extends State<HomePage> {
               child: Icon(Icons.chat),
               splashColor: Colors.white,
             ),
-          )
+          ),
         ],
       ),
     );
