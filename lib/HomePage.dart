@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
+import 'package:generali/NewMenuPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+
+import 'LeonizatePage.dart';
+import 'WatchingCourse.dart';
 
 class HomePage extends StatefulWidget {
   //Getting dni and Passowrd form login
@@ -16,29 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Aprende',
-      style: optionStyle,
-    ),
-    Text(
-      'Regenrate',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +36,8 @@ class _HomePageState extends State<HomePage> {
           Scaffold(
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
-
-            body: Column(
+           
+            body:Column(
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
@@ -158,62 +140,14 @@ class _HomePageState extends State<HomePage> {
                         ))),
                   )
                 ]),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin:EdgeInsets.only(top:10),
-                              child: Text("Liga Leonizate",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    color: Colors.white,
-                                  )))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
+                LeonizatePage(),
                 NewsPage(),
+                WatchingCourse()
               ],
             ),
 
             //TODO: bg
-            bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Aprende',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
-                  label: 'Regenrate',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.red,
-              selectedLabelStyle: TextStyle(
-                fontSize: 16.0,
-              ),
-              onTap: _onItemTapped,
-              unselectedItemColor: Colors.grey,
-            ),
+
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 navigateToNextScreen(context);

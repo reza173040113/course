@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generali/HomePage.dart';
+import 'package:generali/ButtomNavigation.dart';
 import 'package:generali/LoginPage.dart';
 import 'package:flutter/services.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: HomePage(),
+      home: ButtomNavigation(),
     );
   }
 }
