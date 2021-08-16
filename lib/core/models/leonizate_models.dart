@@ -24,6 +24,11 @@ class ProfileModel {
      this.usersbronce,
      this.usersmaster,
      this.usersoro,
+     this.medal,
+     this.puntos,
+     this.mandatory,
+     this.path,
+     this.strategic,
      this.usersplata, pointsbronce, tuconocimientodetalle,
   });
     List<String> ligadetalle;
@@ -32,22 +37,27 @@ class ProfileModel {
     List<String> tuconocimientototal;
     List<String> tusrecursosdetalle;
     List<String> tusrecursostotal;
-    Integer year;
-    Integer max_points;
-    Integer percentage;
-    Integer totalhours;
-    Integer totalpercentage;
-    Integer points;
-    Integer status;
-    Integer pointsbronce;
-    Integer pointsmaster;
-    Integer pointsoro;
-    Integer pointsplata;
-    Integer totalusers;
-    Integer usersbronce;
-    Integer usersmaster;
-    Integer usersoro;
-    Integer usersplata;
+    int year;
+    int medal;
+    int puntos;
+    int max_points;
+    int percentage;
+    int totalhours;
+    int totalpercentage;
+    int points;
+    int status;
+    int pointsbronce;
+    int pointsmaster;
+    int pointsoro;
+    int pointsplata;
+    int totalusers;
+    int usersbronce;
+    int usersmaster;
+    int usersoro;
+    int usersplata;
+    int mandatory;
+    int path;
+    int strategic;
 
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -94,6 +104,11 @@ class ProfileModel {
       totalhours:json["totalhours"],
       totalpercentage:json["totalpercentage"]
     ),
+     medal: json["medal"],
+     puntos: json["puntos"],
+     mandatory: json["mandatory"],
+     path: json["path"],
+     strategic: json["strategic"],
      year:json["year"],
      max_points:json["max_points"],
      percentage:json["percentage"],
@@ -111,5 +126,3 @@ class ProfileModel {
       );
 }
 
-class Integer {
-}

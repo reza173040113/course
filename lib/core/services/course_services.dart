@@ -90,7 +90,7 @@ class CourseService extends BaseService {
   Future getMediaSupport() async {
     Response resp = await dio.get(baseUrl + "/api/v2/media-support/${idSupport}");
     if (resp.statusCode == 200) {
-      return offeringModelFromJson(resp.data);
+      return supportModelFromJson(resp.data);
     }
   }
 }

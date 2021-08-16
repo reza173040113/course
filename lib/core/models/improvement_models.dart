@@ -22,25 +22,25 @@ class ImprovementModel {
     this.number,
     this.totalElements,
     this.totalPages,
-    name,
+    this.name,
   });
   String name;
   String characteristics;
   List<String> content;
-  Integer id;
+  int id;
   String image;
   String modality;
-  Integer rating;
+  int rating;
   String status;
   String subtopic;
   String title;
   String topic;
   String type;
-  Boolean first;
-  Boolean last;
-  Integer number;
-  Integer totalElements;
-  Integer totalPages;
+  bool first;
+  bool last;
+  int number;
+  int totalElements;
+  int totalPages;
   factory ImprovementModel.fromJson(Map<String, dynamic> json) =>
       ImprovementModel(
           content: Object.parse(
@@ -62,7 +62,3 @@ class ImprovementModel {
           totalElements: json["totalElements"],
           totalPages: json["totalPages"]);
 }
-
-class Boolean {}
-
-class Integer {}
