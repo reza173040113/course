@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generali/widget/newsCard.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -6,6 +7,8 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,15 +32,25 @@ class _NewsPageState extends State<NewsPage> {
                     child: Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right:30),
+                          margin: EdgeInsets.only(right: 30),
                           child: Text("View",
-                              style: TextStyle(fontSize: 16, color: Colors.red)),
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.red)),
                         ),
-                            Image.asset("images/App_Assets/right-nav-active.png", width: 8,color: Colors.red,)
+                        Image.asset(
+                          "images/App_Assets/right-nav-active.png",
+                          width: 8,
+                          color: Colors.red,
+                        )
                       ],
                     ))
               ],
             ),
+            Wrap(
+              children: [
+                Container(height: 200, child: CampaignCategories()),
+              ],
+            )
             // Expanded(
             //   child: SizedBox(
             //       height: 10,
@@ -64,8 +77,6 @@ class _NewsPageState extends State<NewsPage> {
             //         ],
             //       )),
             // ),
-           
-            
           ],
         ),
       ),
