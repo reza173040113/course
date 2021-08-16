@@ -4,69 +4,112 @@ List<ProfileModel> profileModelFromJson(String str) => List<ProfileModel>.from(j
 
 class ProfileModel {
   ProfileModel({
-    this.aplications, [
-      this.logo,
-      this.name,
-      this.other,
-      this.psw,
-      this.user
-    ],
-    this.department,
-    this.dni,
-    this.email,
-    this.fileName,
-    this.funcion,
-    this.id,
-    this.image,
-    this.name,
-    this.password,
-    this.surname,
-    this.territorial,
-    this.type,
-    this.userName,
+    this.ligadetalle,
+    this.tucapacitinerarios,
+    this.tucapacidadcursos,
+    this.tuconocimientototal,
+    this.tusrecursosdetalle,
+    this.tusrecursostotal,
+     this.year,
+     this.max_points,
+     this.percentage,
+     this.totalhours,
+     this.totalpercentage,
+     this.points,
+     this.status,
+     this.pointsmaster,
+     this.pointsoro,
+     this.pointsplata,
+     this.totalusers,
+     this.usersbronce,
+     this.usersmaster,
+     this.usersoro,
+     this.usersplata, pointsbronce, tuconocimientodetalle,
   });
+    List<String> ligadetalle;
+    List<String> tucapacitinerarios;
+    List<String> tucapacidadcursos;
+    List<String> tuconocimientototal;
+    List<String> tusrecursosdetalle;
+    List<String> tusrecursostotal;
+    Integer year;
+    Integer max_points;
+    Integer percentage;
+    Integer totalhours;
+    Integer totalpercentage;
+    Integer points;
+    Integer status;
+    Integer pointsbronce;
+    Integer pointsmaster;
+    Integer pointsoro;
+    Integer pointsplata;
+    Integer totalusers;
+    Integer usersbronce;
+    Integer usersmaster;
+    Integer usersoro;
+    Integer usersplata;
 
-  
-  [String] aplications;
-  String logo;
-  String name;
-  String other;
-  String psw;
-  String user;
-  String department;
-  String dni;
-  String email;
-  String fileName;
-  String funcion;
-  Integer id;
-  String image;
-  String name;
-  String password;
-  String surname;
-  String territorial;
-  String type;
-  String userName;
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-        aplications: Object.parse(
-          logo: json["logo"],
-          name: json["name"],
-          other: json["other"],
-          psw: json["psw"],
-          user: json["user"],
-        )        
-        department: json["department"],
-        dni: json["dni"],
-        email: json["email"],
-        fileName: json["fileName"],
-        funcion: json["funcion"],
-        id: json["id"],
-        image: json["image"],
-        name: json["name"],
-        password: json["password"],
-        surname: json["surname"],
-        territorial: json["territorial"],
-        type: json["type"],
-        userName: json["userName"],
+    ligadetalle:Object.parse(      
+     pointsbronce:json["pointsbronce"],
+     pointsmaster:json["pointsmaster"],
+     pointsoro:json["pointsoro"],
+     pointsplata:json["pointsplata"],
+     totalusers:json["totalusers"],
+     usersbronce:json["usersbronce"],
+     usersmaster:json["usersmaster"],
+     usersoro:json["usersoro"],
+     usersplata:json["usersplata"],
+    ),
+    tucapacidadcursos:Object.parse(
+      max_points:json["max_points"],
+      percentage:json["percentage"],
+      points:json["points"],
+      status:json["status"],
+    ),
+    tucapacitinerarios:Object.parse(
+      percentage:json["percentage"],
+      points:json["points"],
+      max_points:json["max_points"],
+      status:json["status"],
+    ),
+    tuconocimientodetalle:Object.parse(
+      percentage:json["percentage"],
+      points:json["points"],
+      year:json["year"],
+      status:json["status"],
+    ),
+    tuconocimientototal:Object.parse(
+      totalhours:json["totalhours"],
+     totalpercentage:json["totalpercentage"],
+    ),
+    tusrecursosdetalle:Object.parse(
+      percentage:json["percentage"],
+      points:json["points"],
+      year:json["year"],
+      status:json["status"],
+    ),
+    tusrecursostotal:Object.parse(
+      totalhours:json["totalhours"],
+      totalpercentage:json["totalpercentage"]
+    ),
+     year:json["year"],
+     max_points:json["max_points"],
+     percentage:json["percentage"],
+     points:json["points"],
+     status:json["status"],     
+     pointsbronce:json["pointsbronce"],
+     pointsmaster:json["pointsmaster"],
+     pointsoro:json["pointsoro"],
+     pointsplata:json["pointsplata"],
+     totalusers:json["totalusers"],
+     usersbronce:json["usersbronce"],
+     usersmaster:json["usersmaster"],
+     usersoro:json["usersoro"],
+     usersplata:json["usersplata"],
       );
+}
+
+class Integer {
 }

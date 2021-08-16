@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 List<ProfileModel> profileModelFromJson(String str) => List<ProfileModel>.from(json.decode(str).map((x) => ProfileModel.fromJson(x)));
 
 class ProfileModel {
-  ProfileModel({
-    this.aplications, [
-      this.logo,
-      this.name,
-      this.other,
-      this.psw,
-      this.user
-    ],
+  ProfileModel({            
+    this.logo,
+    this.name,
+    this.other,
+    this.psw,
+    this.user,
     this.department,
     this.dni,
     this.email,
@@ -18,43 +15,41 @@ class ProfileModel {
     this.funcion,
     this.id,
     this.image,
-    this.name,
+    // this.name,
     this.password,
     this.surname,
     this.territorial,
     this.type,
-    this.userName,
+    this.applications,
+    this.userName, aplications,
   });
-
-  
-  [String] aplications;
-  String logo;
-  String name;
-  String other;
-  String psw;
-  String user;
-  String department;
-  String dni;
-  String email;
-  String fileName;
-  String funcion;
-  Integer id;
-  String image;
-  String name;
-  String password;
-  String surname;
-  String territorial;
-  String type;
-  String userName;
-
+    List<String> applications;
+    String logo;
+    String name;
+    String other;
+    String psw;
+    String user;
+    String department;
+    String dni;
+    String email;
+    String fileName;
+    String funcion;
+    Integer id;
+    String image;
+    // String name;
+    String password;
+    String surname;
+    String territorial;
+    String type;
+    String userName;
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-        aplications: Object.parse(
+          aplications: Object.parse(
           logo: json["logo"],
           name: json["name"],
           other: json["other"],
           psw: json["psw"],
           user: json["user"],
-        )        
+        ),   
         department: json["department"],
         dni: json["dni"],
         email: json["email"],
@@ -69,4 +64,7 @@ class ProfileModel {
         type: json["type"],
         userName: json["userName"],
       );
+}
+
+class Integer {
 }
