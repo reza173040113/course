@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:generali/LeonizateScroll.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class LeonizatePage extends StatefulWidget {
@@ -93,7 +94,8 @@ class Item1 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.2,right: 30),
+                  margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.2, right: 30),
                   child: Text("Liga Leonizate",
                       style: TextStyle(
                           color: Colors.white,
@@ -102,18 +104,28 @@ class Item1 extends StatelessWidget {
                 ),
                 Container(
                     margin: EdgeInsets.only(right: 10),
-                    alignment:Alignment.center,
+                    alignment: Alignment.center,
                     width: 25,
-                    height:25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-                    child: Text("?",style:TextStyle(color: Colors.white,fontSize:20))),
+                    height: 25,
+                    decoration: BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
+                    child: Text("?",
+                        style: TextStyle(color: Colors.white, fontSize: 20))),
                 Container(
                     margin: EdgeInsets.only(right: 10),
-                    alignment:Alignment.center,
+                    alignment: Alignment.center,
                     width: 25,
-                    height:25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-                    child: Text("+",style:TextStyle(color: Colors.white,fontSize:20))),
+                    height: 25,
+                    decoration: BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LeozinateScroll()));
+                        },
+                        child: Text("+",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)))),
               ],
             ),
           ),
@@ -253,13 +265,15 @@ class Item3 extends StatelessWidget {
                           fontSize: 22.0,
                           fontWeight: FontWeight.w600)),
                 ),
-               Container(
+                Container(
                     margin: EdgeInsets.only(right: 10),
-                    alignment:Alignment.center,
+                    alignment: Alignment.center,
                     width: 25,
-                    height:25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-                    child: Text("?",style:TextStyle(color: Colors.white,fontSize:20))),
+                    height: 25,
+                    decoration: BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
+                    child: Text("?",
+                        style: TextStyle(color: Colors.white, fontSize: 20))),
               ],
             ),
           ),
