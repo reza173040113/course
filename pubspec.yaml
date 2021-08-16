@@ -24,7 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider: ^2.3.1
-
+  dio: ^3.0.10
+  json_serializable: ^3.5.1
+  percent_indicator: "^2.1.7+2"
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,6 +62,8 @@ flutter:
     - images/App_Assets/help.png
     - images/App_Assets/medal-silver.png
     - images/App_Assets/medal-master.png
+    - images/App_Assets/medal_oro.png
+
 
 
     

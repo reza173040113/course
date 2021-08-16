@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class LeonizatePage extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _LeonizatePageState extends State<LeonizatePage> {
               items: cardList.map((card) {
                 return Builder(builder: (BuildContext context) {
                   return Container(
-                      height: MediaQuery.of(context).size.height * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.85,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: card);
                 });
@@ -87,12 +88,12 @@ class Item1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(right: 20),
+                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.2,right: 30),
                   child: Text("Liga Leonizate",
                       style: TextStyle(
                           color: Colors.white,
@@ -101,40 +102,73 @@ class Item1 extends StatelessWidget {
                 ),
                 Container(
                     margin: EdgeInsets.only(right: 10),
-                    child: Image.asset("images/App_Assets/help.png")),
-                Image.asset("images/App_Assets/add.png")
+                    alignment:Alignment.center,
+                    width: 25,
+                    height:25,
+                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+                    child: Text("?",style:TextStyle(color: Colors.white,fontSize:20))),
+                Container(
+                    margin: EdgeInsets.only(right: 10),
+                    alignment:Alignment.center,
+                    width: 25,
+                    height:25,
+                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+                    child: Text("+",style:TextStyle(color: Colors.white,fontSize:20))),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                    margin: EdgeInsets.only(top:60,left: 20,right:15),
-                    child: Image.asset("images/App_Assets/medal-silver.png",width: 30,)),
+                    margin: EdgeInsets.only(top: 60, left: 20, right: 15),
+                    child: Image.asset(
+                      "images/App_Assets/medal-silver.png",
+                      width: 30,
+                    )),
                 Container(
-                    margin: EdgeInsets.only(top:40,right: 15),
-                    child: Image.asset("images/App_Assets/medal-silver.png",width: 50,)),
+                    margin: EdgeInsets.only(top: 40, right: 15),
+                    child: Image.asset(
+                      "images/App_Assets/medal-silver.png",
+                      width: 50,
+                    )),
                 Container(
-                    margin: EdgeInsets.only(top:20,right: 15),
-                    child: Image.asset("images/App_Assets/medal-silver.png",width: 70,)),
+                    margin: EdgeInsets.only(top: 20, right: 15),
+                    child: Image.asset(
+                      "images/App_Assets/medal-silver.png",
+                      width: 70,
+                    )),
                 Container(
                     margin: EdgeInsets.only(right: 10),
-                    child: Image.asset("images/App_Assets/medal-master.png",width: 90,)),
+                    child: Image.asset(
+                      "images/App_Assets/medal-master.png",
+                      width: 90,
+                    )),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top:20),
+            margin: EdgeInsets.only(top: 8, left: 5),
+            child: LinearPercentIndicator(
+              width: MediaQuery.of(context).size.width * 0.85,
+              lineHeight: 5.0,
+              percent: 0.5,
+              backgroundColor: Colors.black,
+              progressColor: Colors.yellow,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 20),
             width: 70,
             padding: EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color:Colors.white,
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: Center(child: Text("70",style: TextStyle(color: Colors.red),)),
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            child: Center(
+                child: Text(
+              "70",
+              style: TextStyle(color: Colors.red),
+            )),
           )
         ],
       ),
@@ -150,18 +184,46 @@ class Item2 extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(30)),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text("Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold)),
-          Text("Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600)),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Text("Formacion continua",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold)),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            child: Row(
+              children: [
+                Container(
+                    margin: EdgeInsets.only(left: 20, right: 10, top: 10),
+                    child: Image.asset(
+                      "images/App_Assets/medal_oro.png",
+                      width: 90,
+                    )),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Column(
+                    children: [
+                      Text("0 / 25",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold)),
+                      Text("ANO ACTUAL",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.w600)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -176,8 +238,95 @@ class Item3 extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(30)),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[],
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  child: Text("Estado de la formation",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w600)),
+                ),
+               Container(
+                    margin: EdgeInsets.only(right: 10),
+                    alignment:Alignment.center,
+                    width: 25,
+                    height:25,
+                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+                    child: Text("?",style:TextStyle(color: Colors.white,fontSize:20))),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    CircularPercentIndicator(
+                      radius: 70.0,
+                      lineWidth: 9.0,
+                      percent: 1.0,
+                      center: new Text("0%"),
+                      progressColor: Colors.grey[200],
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Intinerarios",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14)))
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircularPercentIndicator(
+                      radius: 70.0,
+                      lineWidth: 9.0,
+                      percent: 1.0,
+                      center: new Text("0%"),
+                      progressColor: Colors.grey[200],
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Estrategica",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14)))
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircularPercentIndicator(
+                      radius: 70.0,
+                      lineWidth: 9.0,
+                      percent: 1.0,
+                      center: new Text("0%"),
+                      progressColor: Colors.grey[200],
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Text("Obligatoria",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14)))
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
