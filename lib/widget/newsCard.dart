@@ -46,33 +46,7 @@ class CampaignCategories extends StatelessWidget {
                     )),
                   ],
                 ),
-                // child: Container(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: Column(
-                //       children: <Widget>[
-                //         ClipRRect(
-                //           borderRadius: BorderRadius.only(
-                //             topLeft: Radius.circular(8.0),
-                //             topRight: Radius.circular(8.0),
-                //           ),
-                //           child: Image.network(
-                //               "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
-                //               // width: 300,
-                //               height: 150,
-                //               fit: BoxFit.cover),
-                //         ),
-                //         ListTile(
-                //             title: Text("Title"),
-                //             subtitle: Text(
-                //               "subtitle,",
-                //               style:
-                //                   TextStyle(color: Colors.grey, fontSize: 11),
-                //             )),
-                //       ],
-                //     ),
-                //   ),
-                // ),
+                
               );
             }));
   }

@@ -1,129 +1,102 @@
-// import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final modelSearch = modelSearchFromJson(jsonString);
 
-<<<<<<< HEAD
-import 'dart:ffi';
+import 'dart:convert';
 
-List<SearchModel> searchModelFromJson(String str) => List<SearchModel>.from(json.decode(str).map((x) => SearchModel.fromJson(x)));
+ModelSearch modelSearchFromJson(String str) => ModelSearch.fromJson(json.decode(str));
 
-class SearchModel {
-  SearchModel({
-  bool first, last, content, number, totalElements, totalPages;
-  String content;    
-  String idArea;
-  String area;
-  String num_Users;
-  String idsubtopic;
-  String subTopic;
-  String areaImg;
-  String first;
-  String last;
-  String number;
-  String totalElements;
-  String totalPages;
-  String characteristics;
-  String courseid;
-  String description;
-  String globalsituation;
-  String date;
-  String day;
-  String hours;
-  String minutes;
-  String month;
-  String nanos;
-  String seconds;
-  String time;
-  String timezoneOffset;
-  String year;
-  String editionid;
-  String idsubtopic;
-  String idtopic;
-  String image;
-  String itineraryID;
-  String modality;
-  String progress;
-  String rating;
-  String status;
-  String subtopic;
-  String supportid;
-  String title;
-  String topic;
-  String type;
-  String zone;
-  
-  this.content, [
-    this.idArea,
-    this.area,
-    this.num_Users,
-    this.idsubtopic,
-    this.subTopic,
-    this.areaImg,
-    this.characteristics,
-    this.courseid,
-    this.description,
-    this.dtcreation, [
-      this.date,
-      this.day,
-      this.hours,
-      this.minutes,
-      this.month,
-      this.nanos,
-      this.seconds,
-      this.time,
-      this.timezoneOffset,
-      this.year,
-    ],
-    this.editionid,
-    this.idsubtopic,
-    this.idtopic,
-    this.image,
-    this.itineraryID,
-    this.modality,
-    this.progress,
-    this.rating,
-    this.status,
-    this.subtopic,
-    this.supportid,
-    this.title,
-    this.topic,
-    this.type,
-    this.zone,
-  ],
-    this.first,
-    this.last,
-    this.number,
-    this.totalElements,
-    this.totalPages,
-  });
+String modelSearchToJson(ModelSearch data) => json.encode(data.toJson());
 
+class ModelSearch {
+    ModelSearch({
+        this.content,
+        this.first,
+        this.last,
+        this.number,
+        this.totalElements,
+        this.totalPages,
+    });
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
-      content: Object.parse(
-        idArea: json["idArea"],
-        area: json["area"],
-        num_Users: json["num_Users"],
-        idsubtopic: json["idsubtopic"],
-        subTopic: json["subTopic"],
-        areaImg: json["areaImg"],
+    List<Content> content;
+    bool first;
+    bool last;
+    int number;
+    int totalElements;
+    int totalPages;
+
+    factory ModelSearch.fromJson(Map<String, dynamic> json) => ModelSearch(
+        content: List<Content>.from(json["content"].map((x) => Content.fromJson(x))),
+        first: json["first"],
+        last: json["last"],
+        number: json["number"],
+        totalElements: json["totalElements"],
+        totalPages: json["totalPages"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "content": List<dynamic>.from(content.map((x) => x.toJson())),
+        "first": first,
+        "last": last,
+        "number": number,
+        "totalElements": totalElements,
+        "totalPages": totalPages,
+    };
+}
+
+class Content {
+    Content({
+        this.characteristics,
+        this.courseid,
+        this.description,
+        this.dtcreation,
+        this.editionid,
+        this.idsubtopic,
+        this.idtopic,
+        this.image,
+        this.itineraryId,
+        this.modality,
+        this.progress,
+        this.rating,
+        this.status,
+        this.subtopic,
+        this.supportid,
+        this.title,
+        this.topic,
+        this.type,
+        this.zone,
+    });
+
+    String characteristics;
+    int courseid;
+    String description;
+    Dtcreation dtcreation;
+    int editionid;
+    int idsubtopic;
+    int idtopic;
+    String image;
+    int itineraryId;
+    String modality;
+    int progress;
+    int rating;
+    String status;
+    int subtopic;
+    int supportid;
+    String title;
+    int topic;
+    String type;
+    String zone;
+
+    factory Content.fromJson(Map<String, dynamic> json) => Content(
         characteristics: json["characteristics"],
         courseid: json["courseid"],
         description: json["description"],
-        dtcreation: Array.parse(
-          date: json["date"],
-          day: json["day"],
-          hours: json["hours"],
-          minutes: json["minutes"],
-          month: json["month"],
-          nanos: json["nanos"],
-          seconds: json["seconds"],
-          time: json["time"],
-          timezoneOffset: json["timezoneOffset"],
-          year: json["year"],
-        ),
+        dtcreation: Dtcreation.fromJson(json["dtcreation"]),
         editionid: json["editionid"],
         idsubtopic: json["idsubtopic"],
         idtopic: json["idtopic"],
         image: json["image"],
-        itineraryID: json["itineraryID"],
+        itineraryId: json["itineraryID"],
         modality: json["modality"],
         progress: json["progress"],
         rating: json["rating"],
@@ -133,84 +106,80 @@ class SearchModel {
         title: json["title"],
         topic: json["topic"],
         type: json["type"],
-        zone: json["zone"]
-      ),   
-        first: json["first"],
-        last: json["first"],
-        number: json["number"],
-        totalElements: json["totalElements"],
-        totalPages: json["totalPages"],
-      );
+        zone: json["zone"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "characteristics": characteristics,
+        "courseid": courseid,
+        "description": description,
+        "dtcreation": dtcreation.toJson(),
+        "editionid": editionid,
+        "idsubtopic": idsubtopic,
+        "idtopic": idtopic,
+        "image": image,
+        "itineraryID": itineraryId,
+        "modality": modality,
+        "progress": progress,
+        "rating": rating,
+        "status": status,
+        "subtopic": subtopic,
+        "supportid": supportid,
+        "title": title,
+        "topic": topic,
+        "type": type,
+        "zone": zone,
+    };
 }
-=======
-// List<ProfileModel> profileModelFromJson(String str) => List<ProfileModel>.from(json.decode(str).map((x) => ProfileModel.fromJson(x)));
 
-// class ProfileModel {
-//   ProfileModel({
-//     this.aplications, [
-//       this.logo,
-//       this.name,
-//       this.other,
-//       this.psw,
-//       this.user
-//     ],
-//     this.department,
-//     this.dni,
-//     this.email,
-//     this.fileName,
-//     this.funcion,
-//     this.id,
-//     this.image,
-//     this.name,
-//     this.password,
-//     this.surname,
-//     this.territorial,
-//     this.type,
-//     this.userName,
-//   });
+class Dtcreation {
+    Dtcreation({
+        this.date,
+        this.day,
+        this.hours,
+        this.minutes,
+        this.month,
+        this.nanos,
+        this.seconds,
+        this.time,
+        this.timezoneOffset,
+        this.year,
+    });
 
-  
-//   [String] aplications;
-//   String logo;
-//   String name;
-//   String other;
-//   String psw;
-//   String user;
-//   String department;
-//   String dni;
-//   String email;
-//   String fileName;
-//   String funcion;
-//   Integer id;
-//   String image;
-//   String name;
-//   String password;
-//   String surname;
-//   String territorial;
-//   String type;
-//   String userName;
+    int date;
+    int day;
+    int hours;
+    int minutes;
+    int month;
+    int nanos;
+    int seconds;
+    int time;
+    int timezoneOffset;
+    int year;
 
-//   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-//         aplications: Object.parse(
-//           logo: json["logo"],
-//           name: json["name"],
-//           other: json["other"],
-//           psw: json["psw"],
-//           user: json["user"],
-//         )        
-//         department: json["department"],
-//         dni: json["dni"],
-//         email: json["email"],
-//         fileName: json["fileName"],
-//         funcion: json["funcion"],
-//         id: json["id"],
-//         image: json["image"],
-//         name: json["name"],
-//         password: json["password"],
-//         surname: json["surname"],
-//         territorial: json["territorial"],
-//         type: json["type"],
-//         userName: json["userName"],
-//       );
-// }
->>>>>>> 3378901ed6255955c383cb20ac7e42e76322b767
+    factory Dtcreation.fromJson(Map<String, dynamic> json) => Dtcreation(
+        date: json["date"],
+        day: json["day"],
+        hours: json["hours"],
+        minutes: json["minutes"],
+        month: json["month"],
+        nanos: json["nanos"],
+        seconds: json["seconds"],
+        time: json["time"],
+        timezoneOffset: json["timezoneOffset"],
+        year: json["year"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "date": date,
+        "day": day,
+        "hours": hours,
+        "minutes": minutes,
+        "month": month,
+        "nanos": nanos,
+        "seconds": seconds,
+        "time": time,
+        "timezoneOffset": timezoneOffset,
+        "year": year,
+    };
+}
