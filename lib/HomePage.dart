@@ -20,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,8 +34,8 @@ class _HomePageState extends State<HomePage> {
           Scaffold(
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
-           
-            body:Column(
+
+            body: ListView(
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),

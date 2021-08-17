@@ -48,7 +48,7 @@ class _NewsPageState extends State<NewsPage> {
             ),
             Wrap(
               children: [
-                Container(height: 200, child: CampaignCategories()),
+                Container(height: 230, child: ListNewsCard()),
               ],
             )
             // Expanded(

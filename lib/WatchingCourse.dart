@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generali/widget/watchingCard.dart';
 
 class WatchingCourse extends StatefulWidget {
   @override
@@ -43,6 +44,14 @@ class _WatchingCourseState extends State<WatchingCourse> {
                     ))
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Wrap(
+              children: [
+                Container(height: 500, child: ListWatchCard()),
+              ],
+            )
           ],
         ),
       ),
