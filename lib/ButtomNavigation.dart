@@ -3,6 +3,7 @@ import 'package:generali/ChatPage.dart';
 import 'package:generali/NewMenuPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+import 'package:generali/RegeneratePage.dart';
 
 import 'HomePage.dart';
 
@@ -25,7 +26,7 @@ class _ButtomNavigationState extends State<ButtomNavigation> {
   final List<Widget> _widgetOptions = [
     HomePage(),
     NewMenuPage(),
-    NewMenuPage()
+    RegeneratePage()
   ];
 
   void _onItemTapped(int index) {

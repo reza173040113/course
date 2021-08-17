@@ -28,7 +28,7 @@ class _NewMenuPageState extends State<NewMenuPage> {
               backgroundColor: Colors.transparent,
               elevation: 0.0,
               title: Text(
-                '< Volver',
+                'Volver',
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
               ),
             ),
@@ -69,7 +69,19 @@ class _NewMenuPageState extends State<NewMenuPage> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [Text("Cursos"), Text("Details >")],
+                            children: [
+                              Text("Cursos"),
+                              Row(
+                                children: [
+                                  Container(margin:EdgeInsets.only(right: 10), child: Text("Details")),
+                                  Image.asset(
+                                    "images/App_Assets/right-nav-active.png",
+                                    width: 10,
+                                    color: Colors.red,
+                                  )
+                                ],
+                              )
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,20 +94,34 @@ class _NewMenuPageState extends State<NewMenuPage> {
                                     border: Border.all(
                                         color: Colors.redAccent, width: 1),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Center(child: Text("89 \n Completados")),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("89",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Text("Completados")
+                                  ],
+                                ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(
-                                  top: 30,
-                                ),
+                                margin: EdgeInsets.only(top: 30, right: 10),
                                 width: 120,
                                 height: 100,
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.redAccent, width: 1),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Center(child: Text("9 \n Pendients")),
-                              )
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("9",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Text("Pendients")
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           Row(
@@ -109,23 +135,36 @@ class _NewMenuPageState extends State<NewMenuPage> {
                                     border: Border.all(
                                         color: Colors.redAccent, width: 1),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                    child: Text(
-                                        "27/03/2009 \n Primera Fecha inicia")),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("27/03/2009",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Container(
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: Text("Primera fecha inicia"))
+                                  ],
+                                ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(
-                                  top: 10,
-                                ),
+                                margin: EdgeInsets.only(top: 10, right: 10),
                                 width: 120,
                                 height: 100,
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.redAccent, width: 1),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                    child: Text("1306 \n Horas Totales")),
-                              )
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("1306",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    Text("Horas Totales")
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           Container(
@@ -163,11 +202,12 @@ class _NewMenuPageState extends State<NewMenuPage> {
                     ),
                     Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 300,
+                        height: 200,
                         decoration: BoxDecoration(
                           color: Colors.white,
                         ),
                         child: ListView.builder(
+                            padding: EdgeInsets.zero,
                             itemCount: data.length,
                             itemBuilder: (context, index) {
                               return Card(
@@ -178,7 +218,9 @@ class _NewMenuPageState extends State<NewMenuPage> {
                                   Container(
                                       margin:
                                           EdgeInsets.only(bottom: 10, left: 10),
-                                      child: Text(data[index],style:TextStyle(fontWeight: FontWeight.bold) )),
+                                      child: Text(data[index],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold))),
                                   Container(
                                     margin:
                                         EdgeInsets.only(bottom: 10, left: 10),
@@ -186,14 +228,12 @@ class _NewMenuPageState extends State<NewMenuPage> {
                                       children: [
                                         Icon(Icons.sanitizer),
                                         Container(
-                                          margin: EdgeInsets.only(
-                                              right: 10),
+                                          margin: EdgeInsets.only(right: 10),
                                           child: Text("1.30"),
                                         ),
                                         Icon(Icons.wifi),
                                         Container(
-                                          margin: EdgeInsets.only(
-                                              right: 10),
+                                          margin: EdgeInsets.only(right: 10),
                                           child: Text("Online"),
                                         ),
                                         Icon(Icons.flag),
@@ -207,7 +247,376 @@ class _NewMenuPageState extends State<NewMenuPage> {
                               ));
                             })),
                     Container(
+                      padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
+                      child: Text(
+                        "Actividad formativo",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    Container(
                       padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
+                      width: MediaQuery.of(context).size.width,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Stack(children: [
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Cursos",
+                                    style: TextStyle(color: Colors.red)),
+                                Row(
+                                  children: [
+                                    Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                        child: Text("Print",
+                                            style:
+                                                TextStyle(color: Colors.red))),
+                                    Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                        child: Icon(
+                                          Icons.print,
+                                          color: Colors.red,
+                                        ))
+                                  ],
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("89",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Completados")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("9",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Pendients")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("1306",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Horas Totales")
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 4,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("89",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Completados")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("9",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Pendients")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("1306",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Horas Totales")
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 4,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("89",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red)),
+                                      Text(
+                                        "Horao de information",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      Text(
+                                        "2020",
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("89",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red)),
+                                      Text(
+                                        "Horao de information",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      Text(
+                                        "2020",
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("89",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red)),
+                                      Text(
+                                        "Horao de information",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      Text(
+                                        "2020",
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 4,
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(
+                                  top: 10,
+                                ),
+                                child: Text("80.50",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold))),
+                            Container(
+                              margin:
+                                  EdgeInsets.only(top: 8, left: 5, bottom: 10),
+                              child: LinearPercentIndicator(
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                lineHeight: 5.0,
+                                percent: 0.8,
+                                backgroundColor: Colors.black,
+                                progressColor: Colors.yellow,
+                              ),
+                            ),
+                            Text("Nota media (aprobodas)")
+                          ],
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(left: 90),
+                                  height: 170,
+                                  child: VerticalDivider(
+                                    color: Colors.red,
+                                    thickness: 2,
+                                  )),
+                              Container(
+                                  margin: EdgeInsets.only(right: 100),
+                                  height: 170,
+                                  child: VerticalDivider(
+                                    color: Colors.red,
+                                    thickness: 2,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
+                      child: Text(
+                        "Itenaraios",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
+                      width: MediaQuery.of(context).size.width,
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Stack(children: [
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("0",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Completados")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("0",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Pendients")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("0",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                      Text("Horas Totales")
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 4,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Primera Fecha"),
+                                      Text("inicia")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Primera Fecha"),
+                                      Text("inicia")
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Primera Fecha"),
+                                      Text("inicia")
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              thickness: 4,
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(left: 90),
+                                  height: 105,
+                                  child: VerticalDivider(
+                                    color: Colors.red,
+                                    thickness: 2,
+                                  )),
+                              Container(
+                                  margin: EdgeInsets.only(right: 100),
+                                  height: 105,
+                                  child: VerticalDivider(
+                                    color: Colors.red,
+                                    thickness: 2,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ]),
                     ),
                   ],
                 ),
