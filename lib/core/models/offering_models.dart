@@ -1,72 +1,73 @@
-// import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final modelOffering = modelOfferingFromJson(jsonString);
 
-// List<ProfileModel> profileModelFromJson(String str) => List<ProfileModel>.from(json.decode(str).map((x) => ProfileModel.fromJson(x)));
+import 'dart:convert';
 
-// class ProfileModel {
-//   ProfileModel({
-//     this.aplications, [
-//       this.logo,
-//       this.name,
-//       this.other,
-//       this.psw,
-//       this.user
-//     ],
-//     this.department,
-//     this.dni,
-//     this.email,
-//     this.fileName,
-//     this.funcion,
-//     this.id,
-//     this.image,
-//     this.name,
-//     this.password,
-//     this.surname,
-//     this.territorial,
-//     this.type,
-//     this.userName,
-//   });
+ModelOffering modelOfferingFromJson(String str) => ModelOffering.fromJson(json.decode(str));
 
-  
-//   [String] aplications;
-//   String logo;
-//   String name;
-//   String other;
-//   String psw;
-//   String user;
-//   String department;
-//   String dni;
-//   String email;
-//   String fileName;
-//   String funcion;
-//   Integer id;
-//   String image;
-//   String name;
-//   String password;
-//   String surname;
-//   String territorial;
-//   String type;
-//   String userName;
+String modelOfferingToJson(ModelOffering data) => json.encode(data.toJson());
 
-//   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-//         aplications: Object.parse(
-//           logo: json["logo"],
-//           name: json["name"],
-//           other: json["other"],
-//           psw: json["psw"],
-//           user: json["user"],
-//         )        
-//         department: json["department"],
-//         dni: json["dni"],
-//         email: json["email"],
-//         fileName: json["fileName"],
-//         funcion: json["funcion"],
-//         id: json["id"],
-//         image: json["image"],
-//         name: json["name"],
-//         password: json["password"],
-//         surname: json["surname"],
-//         territorial: json["territorial"],
-//         type: json["type"],
-//         userName: json["userName"],
-//       );
-// }
+class ModelOffering {
+    ModelOffering({
+        this.creationDate,
+        this.description,
+        this.duration,
+        this.id,
+        this.image,
+        this.rating,
+        this.title,
+        this.type,
+        this.url,
+        this.viewed,
+        this.vieweddate,
+        this.views,
+        this.vote,
+    });
+
+    String creationDate;
+    String description;
+    String duration;
+    int id;
+    String image;
+    int rating;
+    String title;
+    String type;
+    String url;
+    String viewed;
+    String vieweddate;
+    int views;
+    String vote;
+
+    factory ModelOffering.fromJson(Map<String, dynamic> json) => ModelOffering(
+        creationDate: json["creationDate"],
+        description: json["description"],
+        duration: json["duration"],
+        id: json["id"],
+        image: json["image"],
+        rating: json["rating"],
+        title: json["title"],
+        type: json["type"],
+        url: json["url"],
+        viewed: json["viewed"],
+        vieweddate: json["vieweddate"],
+        views: json["views"],
+        vote: json["vote"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "creationDate": creationDate,
+        "description": description,
+        "duration": duration,
+        "id": id,
+        "image": image,
+        "rating": rating,
+        "title": title,
+        "type": type,
+        "url": url,
+        "viewed": viewed,
+        "vieweddate": vieweddate,
+        "views": views,
+        "vote": vote,
+    };
+}

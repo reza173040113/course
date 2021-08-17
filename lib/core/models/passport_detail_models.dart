@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final modelPassport = modelPassportFromJson(jsonString);
+//     final modelPassportDetail = modelPassportDetailFromJson(jsonString);
 
 import 'dart:convert';
 
-ModelPassport modelPassportFromJson(String str) => ModelPassport.fromJson(json.decode(str));
+ModelPassportDetail modelPassportDetailFromJson(String str) => ModelPassportDetail.fromJson(json.decode(str));
 
-String modelPassportToJson(ModelPassport data) => json.encode(data.toJson());
+String modelPassportDetailToJson(ModelPassportDetail data) => json.encode(data.toJson());
 
-class ModelPassport {
-    ModelPassport({
+class ModelPassportDetail {
+    ModelPassportDetail({
         this.courseDetail,
         this.globalsituation,
         this.itineraryDetail,
@@ -21,7 +21,7 @@ class ModelPassport {
     List<ItineraryDetail> itineraryDetail;
     User user;
 
-    factory ModelPassport.fromJson(Map<String, dynamic> json) => ModelPassport(
+    factory ModelPassportDetail.fromJson(Map<String, dynamic> json) => ModelPassportDetail(
         courseDetail: List<CourseDetail>.from(json["courseDetail"].map((x) => CourseDetail.fromJson(x))),
         globalsituation: List<Globalsituation>.from(json["globalsituation"].map((x) => Globalsituation.fromJson(x))),
         itineraryDetail: List<ItineraryDetail>.from(json["itineraryDetail"].map((x) => ItineraryDetail.fromJson(x))),

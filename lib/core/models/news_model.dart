@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final modelImprovement = modelImprovementFromJson(jsonString);
+//     final modelNews = modelNewsFromJson(jsonString);
 
 import 'dart:convert';
 
-ModelImprovement modelImprovementFromJson(String str) => ModelImprovement.fromJson(json.decode(str));
+ModelNews modelNewsFromJson(String str) => ModelNews.fromJson(json.decode(str));
 
-String modelImprovementToJson(ModelImprovement data) => json.encode(data.toJson());
+String modelNewsToJson(ModelNews data) => json.encode(data.toJson());
 
-class ModelImprovement {
-    ModelImprovement({
+class ModelNews {
+    ModelNews({
         this.content,
         this.first,
         this.last,
@@ -25,7 +25,7 @@ class ModelImprovement {
     int totalElements;
     int totalPages;
 
-    factory ModelImprovement.fromJson(Map<String, dynamic> json) => ModelImprovement(
+    factory ModelNews.fromJson(Map<String, dynamic> json) => ModelNews(
         content: List<Content>.from(json["content"].map((x) => Content.fromJson(x))),
         first: json["first"],
         last: json["last"],
@@ -52,9 +52,7 @@ class Content {
         this.modality,
         this.rating,
         this.status,
-        this.subtopic,
         this.title,
-        this.topic,
         this.type,
     });
 
@@ -64,9 +62,7 @@ class Content {
     String modality;
     int rating;
     String status;
-    String subtopic;
     String title;
-    String topic;
     String type;
 
     factory Content.fromJson(Map<String, dynamic> json) => Content(
@@ -76,9 +72,7 @@ class Content {
         modality: json["modality"],
         rating: json["rating"],
         status: json["status"],
-        subtopic: json["subtopic"],
         title: json["title"],
-        topic: json["topic"],
         type: json["type"],
     );
 
@@ -89,9 +83,7 @@ class Content {
         "modality": modality,
         "rating": rating,
         "status": status,
-        "subtopic": subtopic,
         "title": title,
-        "topic": topic,
         "type": type,
     };
 }
