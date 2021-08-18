@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:generali/AprendePage.dart';
 import 'package:generali/ChatPage.dart';
-import 'package:generali/NewMenuPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
 import 'package:generali/RegeneratePage.dart';
@@ -25,7 +25,7 @@ class _ButtomNavigationState extends State<ButtomNavigation> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = [
     HomePage(),
-    NewMenuPage(),
+    AprendePage(),
     RegeneratePage()
   ];
 
