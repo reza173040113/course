@@ -13,7 +13,7 @@ class _VideoAppState extends State<VideoApp> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-        'https://www.youtube.com/watch?v=c9RzZpV460k')
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
@@ -22,8 +22,17 @@ class _VideoAppState extends State<VideoApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    _visibleTrue() {
+      Visibility(
+          visible: true,
+          child: Icon(
+            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+            color: Colors.red[900],
+          ));
+    }
+
+    return Stack(children: [
+      Center(
         child: _controller.value.isInitialized
             ? AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
@@ -31,19 +40,36 @@ class _VideoAppState extends State<VideoApp> {
               )
             : Container(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+      Positioned(
+        top: 70,
+        left: 160,
+        child: FloatingActionButton(
+          backgroundColor:
+              _controller.value.isPlaying ? Colors.transparent : Colors.white38,
+          onPressed: () {
+            // Wrap the play or pause in a call to `setState`. This ensures the
+            // correct icon is shown.
+            setState(() {
+              // If the video is playing, pause it.
+              if (_controller.value.isPlaying) {
+                _controller.pause();
+              } else {
+                // If the video is paused, play it.
+                _controller.play();
+              }
+            });
+          },
+          // Display the correct icon depending on the state of the player.
+          child: Visibility(
+            visible: _controller.value.isPlaying ? false : true,
+            child: Icon(
+              _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+              color: Colors.red[900],
+            ),
+          ),
         ),
-      ),
-    );
+      )
+    ]);
   }
 
   @override

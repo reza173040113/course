@@ -21,9 +21,9 @@ class _VolverState extends State<Volver> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    child: Image.network(
-                        "https://images.unsplash.com/photo-1568292342316-60aa3d36f4b3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FscGFwZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
-                    // child: VideoApp(),
+                    // child: Image.network(
+                    //     "https://images.unsplash.com/photo-1568292342316-60aa3d36f4b3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FscGFwZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
+                    child: VideoApp(),
                   ),
                 ),
                 // Container(
@@ -400,28 +400,34 @@ class _VolverState extends State<Volver> {
                   SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 20,
-                    ),
-                    width: 70,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.red[900],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                            child: Text("Entrar",
-                                style: TextStyle(color: Colors.white))),
-                        Image.asset(
-                          "images/App_Assets/right-nav-active.png",
-                          width: 8,
-                          color: Colors.white,
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => VideoApp()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: 20,
+                      ),
+                      width: 70,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red[900],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Center(
+                              child: Text("Entrar",
+                                  style: TextStyle(color: Colors.white))),
+                          Image.asset(
+                            "images/App_Assets/right-nav-active.png",
+                            width: 8,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ]),
