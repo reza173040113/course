@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
-import 'package:generali/NewMenuPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
 

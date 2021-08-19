@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:generali/AprendePage.dart';
 import 'package:generali/ChatPage.dart';
 import 'package:generali/LeonizateScrollDetail.dart';
-import 'package:generali/NewMenuPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+import 'package:generali/RegeneratePage.dart';
 
 import 'HomePage.dart';
 import 'LeonizatePage.dart';
@@ -27,8 +28,8 @@ class _LeozinateScrollState extends State<LeozinateScroll> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = [
     HomePage(),
-    NewMenuPage(),
-    NewMenuPage()
+    AprendePage(),
+    RegeneratePage()
   ];
 
   void _onItemTapped(int index) {
