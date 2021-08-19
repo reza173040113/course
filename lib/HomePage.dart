@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.fill,
           ),
           Scaffold(
-            extendBodyBehindAppBar: true,
+            // extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
 
             body: ListView(
@@ -80,7 +80,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Stack(children: [
                   Container(
-                    margin: EdgeInsets.only(left: 20),
+                    margin: EdgeInsets.only(
+                      left: 20,
+                    ),
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextFormField(
                       cursorColor: Colors.white,
@@ -139,8 +141,6 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]),
                 LeonizatePage(),
-                NewsPage(),
-                WatchingCourse()
               ],
             ),
 
@@ -154,6 +154,12 @@ class _HomePageState extends State<HomePage> {
               splashColor: Colors.white,
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 420),
+            child: ListView(
+              children: [NewsPage(), WatchingCourse()],
+            ),
+          )
         ],
       ),
     );

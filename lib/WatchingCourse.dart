@@ -49,7 +49,7 @@ class _WatchingCourseState extends State<WatchingCourse> {
             ),
             Wrap(
               children: [
-                Container(height: 500, child: ListWatchCard()),
+                Container(height: 90, child: ListWatchCard()),
               ],
             )
           ],

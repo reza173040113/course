@@ -73,7 +73,9 @@ class _NewMenuPageState extends State<NewMenuPage> {
                               Text("Cursos"),
                               Row(
                                 children: [
-                                  Container(margin:EdgeInsets.only(right: 10), child: Text("Details")),
+                                  Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text("Details")),
                                   Image.asset(
                                     "images/App_Assets/right-nav-active.png",
                                     width: 10,
