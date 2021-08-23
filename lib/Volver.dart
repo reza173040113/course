@@ -3,6 +3,8 @@ import 'package:generali/Category.dart';
 import 'package:generali/VideoPlayer.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import 'ButtomNavigation.dart';
+
 class Volver extends StatefulWidget {
   @override
   _VolverState createState() => _VolverState();
@@ -88,13 +90,11 @@ class _VolverState extends State<Volver> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => Category()));
+                           Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ButtomNavigation()));
                         },
                         icon: Icon(
-                          Icons.arrow_back,
+                          Icons.arrow_back_ios,
                           color: Colors.white,
                         )),
                     Text(

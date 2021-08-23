@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:generali/Volver.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CategoryTwo extends StatelessWidget {
   final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -53,7 +54,7 @@ class CategoryTwo extends StatelessWidget {
                         padding: EdgeInsets.only(left: 5, right: 5),
                         margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             borderRadius: BorderRadius.circular(10)),
                         child: Row(
                           children: [
@@ -78,7 +79,7 @@ class CategoryTwo extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 left: 5, right: 5, top: 2, bottom: 2),
                             decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: HexColor("#c5281c"),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [

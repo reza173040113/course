@@ -4,6 +4,7 @@ import 'package:generali/ChatPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
 import 'package:generali/RegeneratePage.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'HomePage.dart';
 
@@ -65,7 +66,7 @@ class _ButtomNavigationState extends State<ButtomNavigation> {
                 ),
               ],
               currentIndex: _selectedIndex,
-              selectedItemColor: Colors.red,
+              selectedItemColor: HexColor("#c5281c"),
               selectedLabelStyle: TextStyle(
                 fontSize: 16.0,
               ),

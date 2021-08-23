@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:generali/ButtomNavigation.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class AprendePage extends StatefulWidget {
@@ -11,16 +13,25 @@ class _AprendePageState extends State<AprendePage> {
     "Lorem ipsum",
     "Lorem Ipsum",
     "Lorem Ipsum",
+    "Lorem ipsum",
+    "Lorem Ipsum",
+    "Lorem Ipsum",
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: HexColor("#c5281c"),
           elevation: 0.0,
           title: Row(
             children: [
-              Icon(Icons.arrow_back_ios),
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ButtomNavigation()));
+                },
+              ),
               Text(
                 'Volver',
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
@@ -31,7 +42,7 @@ class _AprendePageState extends State<AprendePage> {
         body: ListView(
           children: [
             Container(
-              color: Colors.redAccent,
+              color: HexColor("#c5281c"),
               padding: EdgeInsets.all(8.0),
               //TODO: Profile Picture's row
               child: profileRow,
@@ -39,7 +50,7 @@ class _AprendePageState extends State<AprendePage> {
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
               width: MediaQuery.of(context).size.width,
-              color: Colors.redAccent,
+              color: HexColor("#c5281c"),
               child: Text(
                 "Actividad formativo",
                 style: TextStyle(
@@ -66,11 +77,11 @@ class _AprendePageState extends State<AprendePage> {
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             width: 3.0,
                           ))),
                           child: Text("Cursos",
-                              style: TextStyle(color: Colors.red))),
+                              style: TextStyle(color: HexColor("#c5281c")))),
                       Container(
                         margin: EdgeInsets.only(right: 10, top: 10),
                         child: Row(
@@ -78,11 +89,11 @@ class _AprendePageState extends State<AprendePage> {
                             Container(
                                 margin: EdgeInsets.only(right: 10),
                                 child: Text("Details",
-                                    style: TextStyle(color: Colors.red))),
+                                    style: TextStyle(color: HexColor("#c5281c")))),
                             Image.asset(
                               "images/App_Assets/right-nav-active.png",
                               width: 10,
-                              color: Colors.red,
+                              color: HexColor("#c5281c"),
                             )
                           ],
                         ),
@@ -98,7 +109,7 @@ class _AprendePageState extends State<AprendePage> {
                         height: 100,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(color: Colors.redAccent, width: 1),
+                                Border.all(color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +126,7 @@ class _AprendePageState extends State<AprendePage> {
                         height: 100,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(color: Colors.redAccent, width: 1),
+                                Border.all(color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +148,7 @@ class _AprendePageState extends State<AprendePage> {
                         height: 100,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(color: Colors.redAccent, width: 1),
+                                Border.all(color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -156,7 +167,7 @@ class _AprendePageState extends State<AprendePage> {
                         height: 100,
                         decoration: BoxDecoration(
                             border:
-                                Border.all(color: Colors.redAccent, width: 1),
+                                Border.all(color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +202,7 @@ class _AprendePageState extends State<AprendePage> {
             ),
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              color: Colors.redAccent,
+              color: HexColor("#c5281c"),
               child: Text(
                 "Cursos",
                 style: TextStyle(
@@ -247,7 +258,7 @@ class _AprendePageState extends State<AprendePage> {
                     })),
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              color: Colors.redAccent,
+              color: HexColor("#c5281c"),
               child: Text(
                 "Actividad formativo",
                 style: TextStyle(
@@ -283,24 +294,24 @@ class _AprendePageState extends State<AprendePage> {
                             decoration: BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
-                              color: Colors.red,
+                              color: HexColor("#c5281c"),
                               width: 3.0,
                             ))),
                             child: Text("Cursos",
                                 style: TextStyle(
-                                  color: Colors.red,
+                                  color: HexColor("#c5281c"),
                                 ))),
                         Row(
                           children: [
                             Container(
                                 margin: EdgeInsets.only(right: 10),
                                 child: Text("Print",
-                                    style: TextStyle(color: Colors.red))),
+                                    style: TextStyle(color: HexColor("#c5281c")))),
                             Container(
                                 margin: EdgeInsets.only(right: 10),
                                 child: Icon(
                                   Icons.print,
-                                  color: Colors.red,
+                                  color: HexColor("#c5281c"),
                                 ))
                           ],
                         )
@@ -405,7 +416,7 @@ class _AprendePageState extends State<AprendePage> {
                               Text("89",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.red)),
+                                      color: HexColor("#c5281c"))),
                               Text(
                                 "Horao de information",
                                 style: TextStyle(fontSize: 10),
@@ -425,7 +436,7 @@ class _AprendePageState extends State<AprendePage> {
                               Text("89",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.red)),
+                                      color: HexColor("#c5281c"))),
                               Text(
                                 "Horao de information",
                                 style: TextStyle(fontSize: 10),
@@ -445,7 +456,7 @@ class _AprendePageState extends State<AprendePage> {
                               Text("89",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.red)),
+                                      color: HexColor("#c5281c"))),
                               Text(
                                 "Horao de information",
                                 style: TextStyle(fontSize: 10),
@@ -490,14 +501,14 @@ class _AprendePageState extends State<AprendePage> {
                           margin: EdgeInsets.only(left: 90),
                           height: 170,
                           child: VerticalDivider(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             thickness: 2,
                           )),
                       Container(
                           margin: EdgeInsets.only(right: 100),
                           height: 170,
                           child: VerticalDivider(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             thickness: 2,
                           )),
                     ],
@@ -507,7 +518,7 @@ class _AprendePageState extends State<AprendePage> {
             ),
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              color: Colors.redAccent,
+              color: HexColor("#c5281c"),
               child: Text(
                 "Itenaraios",
                 style: TextStyle(
@@ -610,14 +621,14 @@ class _AprendePageState extends State<AprendePage> {
                           margin: EdgeInsets.only(left: 90),
                           height: 105,
                           child: VerticalDivider(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             thickness: 2,
                           )),
                       Container(
                           margin: EdgeInsets.only(right: 100),
                           height: 105,
                           child: VerticalDivider(
-                            color: Colors.red,
+                            color: HexColor("#c5281c"),
                             thickness: 2,
                           )),
                     ],

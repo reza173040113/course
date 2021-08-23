@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:generali/core/models/news_model.dart';
-import 'package:generali/widget/newsCard.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'widget/newsCard.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -44,35 +46,35 @@ class _NewsPageState extends State<NewsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 30, left: 20),
-                    child: Text(
-                      "News",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 30, right: 20),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 30),
-                          child: Text("View",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.red)),
-                        ),
-                        Image.asset(
-                          "images/App_Assets/right-nav-active.png",
-                          width: 8,
-                          color: Colors.red,
-                        )
-                      ],
-                    ))
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Container(
+            //         margin: EdgeInsets.only(top: 30, left: 20),
+            //         child: Text(
+            //           "News",
+            //           style:
+            //               TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //         )),
+            //     Container(
+            //         margin: EdgeInsets.only(top: 30, right: 20),
+            //         child: Row(
+            //           children: [
+            //             Container(
+            //               margin: EdgeInsets.only(right: 30),
+            //               child: Text("View",
+            //                   style:
+            //                       TextStyle(fontSize: 16, color: Colors.red)),
+            //             ),
+            //             Image.asset(
+            //               "images/App_Assets/right-nav-active.png",
+            //               width: 8,
+            //               color: Colors.red,
+            //             )
+            //           ],
+            //         ))
+            //   ],
+            // ),
             Wrap(
               children: [
                 Container(height: 200, child: ListNewsCard()),

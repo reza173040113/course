@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:generali/LeonizateScroll.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class LeonizatePage extends StatefulWidget {
@@ -65,8 +66,8 @@ class _LeonizatePageState extends State<LeonizatePage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: _currentIndex == index
-                        ? Colors.red
-                        : Colors.red.withOpacity(0.3),
+                        ? HexColor("#c5281c")
+                        : HexColor("#c5281c").withOpacity(0.3),
                   ),
                 );
               }),
@@ -108,7 +109,7 @@ class Item1 extends StatelessWidget {
                     width: 25,
                     height: 25,
                     decoration: BoxDecoration(
-                        color: Colors.red, shape: BoxShape.circle),
+                        color: HexColor("#c5281c"), shape: BoxShape.circle),
                     child: Text("?",
                         style: TextStyle(color: Colors.white, fontSize: 20))),
                 Container(
@@ -117,7 +118,7 @@ class Item1 extends StatelessWidget {
                     width: 25,
                     height: 25,
                     decoration: BoxDecoration(
-                        color: Colors.red, shape: BoxShape.circle),
+                        color: HexColor("#c5281c"), shape: BoxShape.circle),
                     child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
@@ -165,7 +166,7 @@ class Item1 extends StatelessWidget {
             child: LinearPercentIndicator(
               width: MediaQuery.of(context).size.width * 0.85,
               lineHeight: 5.0,
-              percent: 0.5,
+              percent: 0,
               backgroundColor: Colors.black,
               progressColor: Colors.yellow,
             ),
@@ -178,8 +179,8 @@ class Item1 extends StatelessWidget {
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: Center(
                 child: Text(
-              "70",
-              style: TextStyle(color: Colors.red),
+              "0",
+              style: TextStyle(color: HexColor("#c5281c")),
             )),
           )
         ],
@@ -271,7 +272,7 @@ class Item3 extends StatelessWidget {
                     width: 25,
                     height: 25,
                     decoration: BoxDecoration(
-                        color: Colors.red, shape: BoxShape.circle),
+                        color: HexColor("#c5281c"), shape: BoxShape.circle),
                     child: Text("?",
                         style: TextStyle(color: Colors.white, fontSize: 20))),
               ],

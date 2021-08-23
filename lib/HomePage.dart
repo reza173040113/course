@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'LeonizatePage.dart';
 import 'WatchingCourse.dart';
@@ -34,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             // extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
 
-            body: ListView(
+            body: Column(
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
@@ -130,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                         width: 60,
                         height: 60,
                         decoration: BoxDecoration(
-                            color: Colors.redAccent,
+                            color: HexColor("#c5281c"),
                             borderRadius: BorderRadius.circular(10)),
                         child: IconButton(
                             icon: Icon(
@@ -140,12 +142,39 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]),
                 LeonizatePage(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(top: 30, left: 20),
+                        child: Text(
+                          "News",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                    Container(
+                        margin: EdgeInsets.only(top: 30, right: 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 30),
+                              child: Text("View",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.red)),
+                            ),
+                            Image.asset(
+                              "images/App_Assets/right-nav-active.png",
+                              width: 8,
+                              color: Colors.red,
+                            )
+                          ],
+                        ))
+                  ],
+                ),
               ],
             ),
 
-            //TODO: bg
-
-            floatingActionButton: FloatingActionButton(
+              floatingActionButton: FloatingActionButton(
               onPressed: () {
                 navigateToNextScreen(context);
               },
@@ -154,11 +183,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 420),
+            margin: EdgeInsets.only(top: 480),
             child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
               children: [NewsPage(), WatchingCourse()],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:generali/LeonizateScroll.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class LeonizateScrollDetail extends StatefulWidget {
@@ -46,7 +47,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             width: 25,
                             height: 25,
                             decoration: BoxDecoration(
-                                color: Colors.red, shape: BoxShape.circle),
+                                color: HexColor("#c5281c"), shape: BoxShape.circle),
                             child: Text("?",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20))),
@@ -269,7 +270,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: HexColor("#c5281c"),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
@@ -293,7 +294,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             width: 25,
                             height: 25,
                             decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: HexColor("#c5281c"),
                                 shape: BoxShape.circle,
                                 border:
                                     Border.all(color: Colors.white, width: 1)),
@@ -353,7 +354,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: HexColor("#c5281c"),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
@@ -377,7 +378,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             width: 25,
                             height: 25,
                             decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: HexColor("#c5281c"),
                                 shape: BoxShape.circle,
                                 border:
                                     Border.all(color: Colors.white, width: 1)),

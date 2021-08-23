@@ -53,17 +53,19 @@ class _NewsCardState extends State<NewsCard> {
             ),
           ),
           Container(
+              margin: EdgeInsets.only(left:10,top:10),
               child: Text(
-            widget.title,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
+                widget.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
           SizedBox(
             height: 20,
           ),
           Container(
+              margin: EdgeInsets.only(left:10,bottom:10),
               child: Text(
-            widget.subtitle,
-          )),
+                widget.subtitle,
+              )),
         ],
       ),
     );
