@@ -29,7 +29,7 @@ class _AprendePageState extends State<AprendePage> {
                 icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ButtomNavigation()));
+                      builder: (context) => ButtomNavigation(dni: '77777777B', password: '77777777B')));
                 },
               ),
               Text(
