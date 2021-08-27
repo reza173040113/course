@@ -20,7 +20,12 @@ class _NewsPageState extends State<NewsPage> {
       loading = true;
     });
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new");
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
+        headers: {
+          "key": "Accept",
+          "value": "application/json",
+          "type": "text",
+        });
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body);
       setState(() {
@@ -77,63 +82,69 @@ class _NewsPageState extends State<NewsPage> {
             // ),
             Wrap(
               children: [
-                Container(height: 200, child: ListNewsCard()),
-                // loading
-                //     ? Center(child: CircularProgressIndicator())
-                //     :
-                // Container(
-                //     height: 200,
-                //     child: Container(
-                //         height: 120.0,
-                //         child: ListView.builder(
-                //             scrollDirection: Axis.horizontal,
-                //             padding: const EdgeInsets.all(8),
-                //             itemCount: listModel.length,
-                //             itemBuilder: (BuildContext context, int index) {
-                //               final nDataList = listModel[index];
-                //               return ListView.builder(
-                //                 itemBuilder: (BuildContext context, int index) {
-                //                   return Card(
-                //                     child: Column(
-                //                       crossAxisAlignment:
-                //                           CrossAxisAlignment.start,
-                //                       children: [
-                //                         Expanded(
-                //                           child: Container(
-                //                             width: 250,
-                //                             // height: 100,
-                //                             decoration: BoxDecoration(
-                //                               borderRadius:
-                //                                   BorderRadius.circular(10),
-                //                               image: DecorationImage(
-                //                                 image: NetworkImage(
-                //                                     "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg"),
-                //                                 fit: BoxFit.fill,
-                //                                 alignment: Alignment.topCenter,
-                //                               ),
-                //                             ),
-                //                             // Text('Entry ${entries[index]}'),
-                //                           ),
-                //                         ),
-                //                         Container(
-                //                             child: Text(
-                //                           "nDataList.fi",
-                //                           style: TextStyle(
-                //                               fontWeight: FontWeight.bold),
-                //                         )),
-                //                         SizedBox(
-                //                           height: 20,
-                //                         ),
-                //                         Container(
-                //                             child: Text(
-                //                           "Subtitle",
-                //                         )),
-                //                       ],
-                //                     ),
-                //                   );
-                //                 },
-                //               );
-                //             }))),
+                // Container(height: 200, child: ListNewsCard()),
+                loading
+                    ? Center(child: CircularProgressIndicator())
+                    :
+                Container(
+                    height: 200,
+                    child: Container(
+                        height: 120.0,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.all(8),
+                            itemCount: listModel.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final nDataList = listModel[index];
+                              return ListView.builder(
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Card(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: nDataList.content.map((c){
+                                        return Column(
+                                          children: [
+                                            Expanded(
+                                          child: Container(
+                                            width: 250,
+                                            // height: 100,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg"),
+                                                fit: BoxFit.fill,
+                                                alignment: Alignment.topCenter,
+                                              ),
+                                            ),
+                                            // Text('Entry ${entries[index]}'),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                          "nDataList.fi",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
+                                            child: Text(
+                                          "Subtitle",
+                                        )),
+                                          ],
+                                        );
+                                      }).toList() 
+                                        
+                                      
+                                    ),
+                                  );
+                                },
+                              );
+                            }))),
               ],
             )
           ],
