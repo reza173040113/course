@@ -25,6 +25,7 @@ class _AprendePageState extends State<AprendePage> {
           elevation: 0.0,
           title: Row(
             children: [
+
               // IconButton(
               //   icon: Icon(Icons.arrow_back_ios),
               //   onPressed: () {
@@ -32,6 +33,7 @@ class _AprendePageState extends State<AprendePage> {
               //         builder: (context) => ButtomNavigation()));
               //   },
               // ),
+
               Text(
                 'Volver',
                 style: TextStyle(fontSize: 16.0, color: Colors.white),
