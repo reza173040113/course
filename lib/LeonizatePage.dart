@@ -28,6 +28,7 @@ class _LeonizatePageState extends State<LeonizatePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 30),
       margin: EdgeInsets.only(top: 10),
       child: Center(
         child: Column(
