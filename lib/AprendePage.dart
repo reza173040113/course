@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generali/AprendeDetail.dart';
 import 'package:generali/ButtomNavigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -25,7 +26,6 @@ class _AprendePageState extends State<AprendePage> {
           elevation: 0.0,
           title: Row(
             children: [
-
               // IconButton(
               //   icon: Icon(Icons.arrow_back_ios),
               //   onPressed: () {
@@ -90,8 +90,17 @@ class _AprendePageState extends State<AprendePage> {
                           children: [
                             Container(
                                 margin: EdgeInsets.only(right: 10),
-                                child: Text("Details",
-                                    style: TextStyle(color: HexColor("#c5281c")))),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AprendeDetail()));
+                                  },
+                                  child: Text("Details",
+                                      style: TextStyle(
+                                          color: HexColor("#c5281c"))),
+                                )),
                             Image.asset(
                               "images/App_Assets/right-nav-active.png",
                               width: 10,
@@ -110,8 +119,8 @@ class _AprendePageState extends State<AprendePage> {
                         width: 120,
                         height: 100,
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: HexColor("#c5281c"), width: 1),
+                            border: Border.all(
+                                color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -127,8 +136,8 @@ class _AprendePageState extends State<AprendePage> {
                         width: 120,
                         height: 100,
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: HexColor("#c5281c"), width: 1),
+                            border: Border.all(
+                                color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -149,8 +158,8 @@ class _AprendePageState extends State<AprendePage> {
                         width: 120,
                         height: 100,
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: HexColor("#c5281c"), width: 1),
+                            border: Border.all(
+                                color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -168,8 +177,8 @@ class _AprendePageState extends State<AprendePage> {
                         width: 120,
                         height: 100,
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: HexColor("#c5281c"), width: 1),
+                            border: Border.all(
+                                color: HexColor("#c5281c"), width: 1),
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -258,386 +267,6 @@ class _AprendePageState extends State<AprendePage> {
                         ],
                       ));
                     })),
-            Container(
-              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              color: HexColor("#c5281c"),
-              child: Text(
-                "Actividad formativo",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
-              width: MediaQuery.of(context).size.width,
-              height: 330,
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Stack(children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            margin:
-                                EdgeInsets.only(left: 10, top: 10, bottom: 20),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                              color: HexColor("#c5281c"),
-                              width: 3.0,
-                            ))),
-                            child: Text("Cursos",
-                                style: TextStyle(
-                                  color: HexColor("#c5281c"),
-                                ))),
-                        Row(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Text("Print",
-                                    style: TextStyle(color: HexColor("#c5281c")))),
-                            Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Icon(
-                                  Icons.print,
-                                  color: HexColor("#c5281c"),
-                                ))
-                          ],
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("89",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Completados")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("9",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Pendients")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("1306",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Horas Totales")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("89",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Completados")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("9",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Pendients")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("1306",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Horas Totales")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("89",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: HexColor("#c5281c"))),
-                              Text(
-                                "Horao de information",
-                                style: TextStyle(fontSize: 10),
-                              ),
-                              Text(
-                                "2020",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("89",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: HexColor("#c5281c"))),
-                              Text(
-                                "Horao de information",
-                                style: TextStyle(fontSize: 10),
-                              ),
-                              Text(
-                                "2020",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("89",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: HexColor("#c5281c"))),
-                              Text(
-                                "Horao de information",
-                                style: TextStyle(fontSize: 10),
-                              ),
-                              Text(
-                                "2020",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 4,
-                    ),
-                    Container(
-                        margin: EdgeInsets.only(
-                          top: 10,
-                        ),
-                        child: Text("80.50",
-                            style: TextStyle(fontWeight: FontWeight.bold))),
-                    Container(
-                      margin: EdgeInsets.only(top: 8, left: 5, bottom: 10),
-                      child: LinearPercentIndicator(
-                        width: MediaQuery.of(context).size.width * 0.95,
-                        lineHeight: 5.0,
-                        percent: 0.8,
-                        backgroundColor: Colors.black,
-                        progressColor: Colors.yellow,
-                      ),
-                    ),
-                    Text("Nota media (aprobodas)")
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 90),
-                          height: 170,
-                          child: VerticalDivider(
-                            color: HexColor("#c5281c"),
-                            thickness: 2,
-                          )),
-                      Container(
-                          margin: EdgeInsets.only(right: 100),
-                          height: 170,
-                          child: VerticalDivider(
-                            color: HexColor("#c5281c"),
-                            thickness: 2,
-                          )),
-                    ],
-                  ),
-                ),
-              ]),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              color: HexColor("#c5281c"),
-              child: Text(
-                "Itenaraios",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
-              width: MediaQuery.of(context).size.width,
-              height: 125,
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Stack(children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("0",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Completados")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("0",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Pendients")
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("0",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Horas Totales")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 4,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Text("Primera Fecha"), Text("inicia")],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Text("Primera Fecha"), Text("inicia")],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Text("Primera Fecha"), Text("inicia")],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 4,
-                    ),
-                  ],
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 90),
-                          height: 105,
-                          child: VerticalDivider(
-                            color: HexColor("#c5281c"),
-                            thickness: 2,
-                          )),
-                      Container(
-                          margin: EdgeInsets.only(right: 100),
-                          height: 105,
-                          child: VerticalDivider(
-                            color: HexColor("#c5281c"),
-                            thickness: 2,
-                          )),
-                    ],
-                  ),
-                ),
-              ]),
-            ),
           ],
         ));
   }
