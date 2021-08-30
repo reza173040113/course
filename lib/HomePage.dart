@@ -11,12 +11,12 @@ import 'WatchingCourse.dart';
 
 class HomePage extends StatefulWidget {
   //Getting dni and Passowrd form login
-  final String dni, password;
-  HomePage({
-    Key key,
-    @required this.dni,
-    this.password,
-  }) : super(key: key);
+  // final String dni, password;
+  // HomePage({
+  //   Key key,
+  //   @required this.dni,
+  //   this.password,
+  // }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -150,71 +150,69 @@ class _HomePageState extends State<HomePage> {
               children: [NewsPage(), WatchingCourse()],
             ),
           ),
-          Expanded(
-            child: Stack(children: [
-              // Container(
-              //   margin: EdgeInsets.only(
-              //     left: 20,
-              //   ),
-              //   width: MediaQuery.of(context).size.width * 0.8,
-              //   child: TextFormField(
-              //     cursorColor: Colors.white,
-              //     obscureText: true,
-              //     style: TextStyle(color: Colors.white),
-              //     decoration: new InputDecoration(
-              //       labelText: "Search",
-              //       labelStyle: TextStyle(
-              //         color: Colors.grey,
-              //         fontSize: 20.0,
-              //       ),
-              //       errorStyle: TextStyle(
-              //         color: Colors.white,
-              //         fontSize: 18.0,
-              //       ),
-              //       fillColor: Colors.white,
-              //       filled: true,
-              //       border: new OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(25.0),
-              //       ),
-              //       enabledBorder: new OutlineInputBorder(
-              //         borderRadius: new BorderRadius.circular(25.0),
-              //         borderSide: BorderSide(color: Colors.white),
-              //       ),
-              //       focusedBorder: new OutlineInputBorder(
-              //         borderRadius: new BorderRadius.circular(25.0),
-              //         borderSide: BorderSide(
-              //           color: Colors.white,
-              //         ),
-              //       ),
-              //     ),
-              //     validator: (input) {
-              //       if (input.length == 0) {
-              //         return "Search cannot be empty";
-              //       } else {
-              //         return null;
-              //       }
-              //     },
-              //     keyboardType: TextInputType.text,
-              //   ),
-              // ),
-              // Container(
-              //   alignment: Alignment.centerRight,
-              //   margin: EdgeInsets.only(right: 30),
-              //   child: Container(
-              //       width: 60,
-              //       height: 60,
-              //       decoration: BoxDecoration(
-              //           color: HexColor("#c5281c"),
-              //           borderRadius: BorderRadius.circular(10)),
-              //       child: IconButton(
-              //           icon: Icon(
-              //         Icons.search,
-              //         color: Colors.white,
-              //       ))),
-              // )
-              searchBarUI()
-            ]),
-          ),
+          Stack(children: [
+            // Container(
+            //   margin: EdgeInsets.only(
+            //     left: 20,
+            //   ),
+            //   width: MediaQuery.of(context).size.width * 0.8,
+            //   child: TextFormField(
+            //     cursorColor: Colors.white,
+            //     obscureText: true,
+            //     style: TextStyle(color: Colors.white),
+            //     decoration: new InputDecoration(
+            //       labelText: "Search",
+            //       labelStyle: TextStyle(
+            //         color: Colors.grey,
+            //         fontSize: 20.0,
+            //       ),
+            //       errorStyle: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 18.0,
+            //       ),
+            //       fillColor: Colors.white,
+            //       filled: true,
+            //       border: new OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(25.0),
+            //       ),
+            //       enabledBorder: new OutlineInputBorder(
+            //         borderRadius: new BorderRadius.circular(25.0),
+            //         borderSide: BorderSide(color: Colors.white),
+            //       ),
+            //       focusedBorder: new OutlineInputBorder(
+            //         borderRadius: new BorderRadius.circular(25.0),
+            //         borderSide: BorderSide(
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //     ),
+            //     validator: (input) {
+            //       if (input.length == 0) {
+            //         return "Search cannot be empty";
+            //       } else {
+            //         return null;
+            //       }
+            //     },
+            //     keyboardType: TextInputType.text,
+            //   ),
+            // ),
+            // Container(
+            //   alignment: Alignment.centerRight,
+            //   margin: EdgeInsets.only(right: 30),
+            //   child: Container(
+            //       width: 60,
+            //       height: 60,
+            //       decoration: BoxDecoration(
+            //           color: HexColor("#c5281c"),
+            //           borderRadius: BorderRadius.circular(10)),
+            //       child: IconButton(
+            //           icon: Icon(
+            //         Icons.search,
+            //         color: Colors.white,
+            //       ))),
+            // )
+            // searchBarUI()
+          ]),
         ],
       ),
     );

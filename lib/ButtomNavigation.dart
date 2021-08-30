@@ -10,12 +10,12 @@ import 'HomePage.dart';
 
 class ButtomNavigation extends StatefulWidget {
   //Getting dni and Passowrd form login
-  final String dni, password;
-  ButtomNavigation({
-    Key key,
-    @required this.dni,
-    this.password,
-  }) : super(key: key);
+  // final String dni, password;
+  // ButtomNavigation({
+  //   Key key,
+  //   @required this.dni,
+  //   this.password,
+  // }) : super(key: key);
   @override
   _ButtomNavigationState createState() => _ButtomNavigationState();
 }

@@ -5,7 +5,9 @@ import 'package:http/http.dart' as http;
 
 import 'package:generali/HomePage.dart';
 import 'dart:io'; // for using HttpClient
-import 'dart:convert'; // for using json.decode()
+import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // for using json.decode()
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,32 +17,45 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _key = new GlobalKey();
   String dni, password;
-  bool _autovalidate = false;
+ 
+
+  bool _autovalidate, _isLoading = false;
   signInMethod(String email, String password) async {
-      print(email + "dan" + password);
+    print(email + "dan" + password);
+    String url =
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/authenticate";
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     Map<String, String> headers = {
+      'Content-Type': 'application/json',
+    };
+    final msg = jsonEncode({"dni": "$email", "password": "$password"});
+    var jsonResponse;
+    var res = await http.post(url, body: msg,headers: headers);
+    print("response statuscocde 200 : ${res.body}");
 
-    final response = await http.post(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/authenticate",
-        body: {"dni": email, "password": password},headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      });
-    var jsonResponse = null;
-    print("haiiii"+response.body);
-    if (response.statusCode == 200) {
-      jsonResponse = json.decode(response.body);
+    if (res.statusCode == 200) {
+      jsonResponse = json.decode(res.body);
+      print("response statuscode : ${res.statusCode}");
+      print("response statuscocde 200 : ${res.body}");
       if (jsonResponse != null) {
-        print(jsonResponse['token']); // for Printing the token
+        setState(() {
+          _isLoading = false;
+        });
 
-        // Navigator used to enter inside app if the authentication is correct
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (BuildContext context) => ButtomNavigation(),
-            ),
-            (Route<dynamic> route) => false);
+        sharedPreferences.setString("token", jsonResponse['token']);
+        Get.to(ButtomNavigation());
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => ButtomNavigation(
+                     
+        //             )));
       }
     } else {
-      print("Error message like email or password wrong!!!!"); // Toast
+      setState(() {
+        _isLoading = false;
+      });
+      print("response status  : ${res.body}");
     }
   }
 
@@ -184,8 +199,8 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.fromLTRB(24.0, 48.0, 24.0, 8.0),
                   child: MaterialButton(
                     onPressed: () {
-                     print("emailnya $dni");
-                     _navigeteToNextScreen(context);
+                      print("emailnya $dni");
+                      _navigeteToNextScreen(context);
                     },
                     child: Text(
                       "Entrar",
@@ -212,13 +227,7 @@ class _LoginPageState extends State<LoginPage> {
       //saves to global key
       _key.currentState.save();
       signInMethod(dni, password);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ButtomNavigation(
-                    dni: dni,
-                    password: password,
-                  )));
+      
     } else {
       setState(() {
         _autovalidate = true;

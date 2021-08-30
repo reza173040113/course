@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'LoginPage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -196,7 +200,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: EdgeInsets.fromLTRB(0.0, 48.0, 0.0, 0.0),
                     margin: EdgeInsets.only(top: 72.0),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                        sharedPreferences.remove('token');
+                        Get.to(LoginPage());
+                      },
                       child: Text(
                         "Logout",
                         style:
