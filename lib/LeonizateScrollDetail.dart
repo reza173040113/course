@@ -1,15 +1,58 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:generali/LeonizateScroll.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+String finalToken;
 class LeonizateScrollDetail extends StatefulWidget {
   @override
   _LeonizateScrollDetailState createState() => _LeonizateScrollDetailState();
 }
 
 class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
+  var loading = false;
+   List<dynamic> data1;
+  Map<String, dynamic> map;
+  Future getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/training_passport/58726",
+        headers: headers);
+
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
+      setState(() {
+        data1=map['ligadetalle'];
+        
+      });
+    }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(

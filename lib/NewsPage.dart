@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:generali/widget/newsCard.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 String finalToken;
 
@@ -16,7 +16,8 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   var loading = false;
   List<dynamic> data;
-  Future<Null> getData() async {
+  Map<String, dynamic> map;
+  Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var obtainedToken = sharedPreferences.getString("token");
@@ -32,16 +33,19 @@ class _NewsPageState extends State<NewsPage> {
     final responseData = await http.get(
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
         headers: headers);
-    // print("haii"+jsonDecode(responseData.body));
-    if (responseData.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(responseData.body);
-      print(map);
 
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
       setState(() {
         data = map["content"];
         print("data news1 " + data[0]["title"]);
+        print(data.length);
       });
     }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
   }
 
   @override
@@ -88,7 +92,7 @@ class _NewsPageState extends State<NewsPage> {
             //         ))
             //   ],
             // ),
-            // FutureBuilder<List>(
+            // FutureBuilder(
             //   future: getData(),
             //   builder: (context, snapshot) {
             //     if (snapshot.hasError) print(snapshot.error);
@@ -97,52 +101,66 @@ class _NewsPageState extends State<NewsPage> {
             //         : Center(child: CircularProgressIndicator());
             //   },
             // ),
+            // data.length==null&&data==null&&data.length==0?Container(): 
             Wrap(
-              children: [
-                // Container(
-                //     height: 200,
-                //     child: Card(
-                //       child: Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Expanded(
-                //             child: Container(
-                //               width: 250,
-                //               // height: 100,
-                //               decoration: BoxDecoration(
-                //                 borderRadius: BorderRadius.circular(10),
-                //                 // image: DecorationImage(
-                //                 //   image: NetworkImage("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
-                //                 //   fit: BoxFit.fill,
-                //                 //   alignment: Alignment.topCenter,
-                //                 // ),
-                //               ),
-                //               child: Image.network("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
-                //               // Text('Entry ${entries[index]}'),
-                //             ),
-                //           ),
-                //           Container(
-                //               margin: EdgeInsets.only(left: 10, top: 10),
-                //               child: Text(
-                //                 data[0]['title'],
-                //                 style: TextStyle(fontWeight: FontWeight.bold),
-                //               )),
-                //           SizedBox(
-                //             height: 20,
-                //           ),
-                //           Container(
-                //               margin: EdgeInsets.only(left: 10, bottom: 10),
-                //               child: Text(
-                //                 data[0]['status'],
-                //               )),
-                //         ],
-                //       ),
-                //     )),
-                // loading
-                //     ? Center(child: CircularProgressIndicator())
-                //     :
-              ],
-            )
+                    children: [
+                      // Container(
+                      //     height: 120.0,
+                      //     child: ListView.builder(
+                      //         scrollDirection: Axis.horizontal,
+                      //         padding: const EdgeInsets.all(8),
+                      //         itemCount: data.length==null?0:data.length,
+                      //         itemBuilder: (BuildContext context, int index) {
+                      //           return NewsCard(
+                      //               image:
+                      //                   "https://precampusgenerali.enzymeadvisinggroup.com/"+data[index]['image'],
+                      //               title: data[index]['title'],
+                      //               subtitle: data[index]['type']);
+                      //         }))
+                      // Container(
+                      //     height: 200,
+                      //     child: Card(
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Expanded(
+                      //             child: Container(
+                      //               width: 250,
+                      //               // height: 100,
+                      //               decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(10),
+                      //                 // image: DecorationImage(
+                      //                 //   image: NetworkImage("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
+                      //                 //   fit: BoxFit.fill,
+                      //                 //   alignment: Alignment.topCenter,
+                      //                 // ),
+                      //               ),
+                      //               child: Image.network("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
+                      //               // Text('Entry ${entries[index]}'),
+                      //             ),
+                      //           ),
+                      //           Container(
+                      //               margin: EdgeInsets.only(left: 10, top: 10),
+                      //               child: Text(
+                      //                 data[0]['title'],
+                      //                 style: TextStyle(fontWeight: FontWeight.bold),
+                      //               )),
+                      //           SizedBox(
+                      //             height: 20,
+                      //           ),
+                      //           Container(
+                      //               margin: EdgeInsets.only(left: 10, bottom: 10),
+                      //               child: Text(
+                      //                 data[0]['status'],
+                      //               )),
+                      //         ],
+                      //       ),
+                      //     )),
+                      // loading
+                      //     ? Center(child: CircularProgressIndicator())
+                      //     :
+                    ],
+                  )
           ],
         ),
       ),
