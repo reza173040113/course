@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:generali/ButtomNavigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+String finalToken;
 class AprendeDetail extends StatefulWidget {
   @override
   _AprendeDetailState createState() => _AprendeDetailState();
@@ -17,6 +21,47 @@ class _AprendeDetailState extends State<AprendeDetail> {
     "Lorem Ipsum",
     "Lorem Ipsum",
   ];
+  var loading = false;
+   List<dynamic> data1;
+  List<dynamic> data2;
+  Map<String, dynamic> map;
+  Future getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/training_passport/58726",
+        headers: headers);
+
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
+      setState(() {
+        data1=map['courseDetail'];
+        data2 = map["globalsituation"];
+        print("data news1 " + data[0]["title"]);
+        print(data.length);
+      });
+    }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

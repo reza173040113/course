@@ -16,7 +16,8 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   var loading = false;
   List<dynamic> data;
-  Future<List<dynamic>> getData() async {
+  Map<String, dynamic> map;
+  Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var obtainedToken = sharedPreferences.getString("token");
@@ -32,16 +33,19 @@ class _NewsPageState extends State<NewsPage> {
     final responseData = await http.get(
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
         headers: headers);
-    // print("haii"+jsonDecode(responseData.body));
-    if (responseData.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(responseData.body);
-      print(map);
 
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
       setState(() {
         data = map["content"];
         print("data news1 " + data[0]["title"]);
+        print(data.length);
       });
     }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
   }
 
   @override
@@ -110,7 +114,7 @@ class _NewsPageState extends State<NewsPage> {
             //         ))
             //   ],
             // ),
-            // FutureBuilder<List>(
+            // FutureBuilder(
             //   future: getData(),
             //   builder: (context, snapshot) {
             //     if (snapshot.hasError) print(snapshot.error);
@@ -119,6 +123,7 @@ class _NewsPageState extends State<NewsPage> {
             //         : Center(child: CircularProgressIndicator());
             //   },
             // ),
+            // data.length==null&&data==null&&data.length==0?Container():
             Wrap(
               children: [
                 // Text(data[0]["title"]),
