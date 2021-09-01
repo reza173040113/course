@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 
 import 'LoginPage.dart';
 import 'core/models/profile_models.dart';
+
 String finalToken;
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -16,6 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   List<dynamic> data;
   var loading = false;
+  Map<String, dynamic> map;
   Future<Null> getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -25,21 +28,26 @@ class _ProfilePageState extends State<ProfilePage> {
       finalToken = obtainedToken;
     });
     print("token final $finalToken");
-     Map<String, String> headers = {
-      'Accept':'application/json',
+    Map<String, String> headers = {
+      'Accept': 'application/json',
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/profile",
         headers: headers);
-        // print("haii"+jsonDecode(responseData.body));
+    // print("haii"+jsonDecode(responseData.body));
     if (responseData.statusCode == 200) {
-       Map<String, dynamic> map = json.decode(responseData.body);
+      map = json.decode(responseData.body);
       print(map);
 
       setState(() {
-        data = map["filename"];
-        print("data profil " + data[0]["name"]);
+        sharedPreferences.setInt("id", map['id']);
+        // map = json.decode(responseData.body);
+        // print(map);
+        // data=map['name'];
+        // map['surname'];
+        // print("namaaa " + map['name'] + map['surname']);
+        // data = map['aplications'];
       });
     }
   }
@@ -49,6 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     getData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,7 +89,69 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     padding: EdgeInsets.all(8.0),
                     //TODO: Profile Picture's row
-                    child: profileRow,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: 72.0,
+                          height: 72.0,
+                          child: Image.asset(
+                            "images/profile.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        // map!=null? Container(
+                        //     margin: EdgeInsets.only(right: 24.0),
+                        //     child: Column(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: <Widget>[
+                        //         Text(
+                        //           map['name'],
+                        //           style: TextStyle(
+                        //             fontSize: 20.0,
+                        //             color: Colors.white,
+                        //             fontWeight: FontWeight.w800,
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           map['surname'],
+                        //           style: TextStyle(
+                        //             fontSize: 16.0,
+                        //             color: Colors.white,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     )):Center(child: CircularProgressIndicator()),
+                        Container(
+                          margin: EdgeInsets.only(left: 48.0),
+                          child: Ink(
+                            decoration: const ShapeDecoration(
+                              shape: CircleBorder(),
+                              color: Colors.white,
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.card_membership),
+                              color: Colors.red,
+                              onPressed: () {},
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Ink(
+                            decoration: const ShapeDecoration(
+                              shape: CircleBorder(),
+                              color: Colors.white,
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.add),
+                              color: Colors.red,
+                              onPressed: () {},
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
@@ -240,7 +311,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     margin: EdgeInsets.only(top: 72.0),
                     child: MaterialButton(
                       onPressed: () async {
-                        final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                        final SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
                         sharedPreferences.remove('token');
                         Get.to(LoginPage());
                       },
@@ -268,67 +340,67 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Top Profile low, below AppBar
 // Contains profile picture, Name, and two buttons
-  final profileRow = Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      Container(
-        width: 72.0,
-        height: 72.0,
-        child: Image.asset(
-          "images/profile.png",
-          fit: BoxFit.fill,
-        ),
-      ),
-      Container(
-          margin: EdgeInsets.only(right: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Name',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(
-                'name',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          )),
-      Container(
-        margin: EdgeInsets.only(left: 48.0),
-        child: Ink(
-          decoration: const ShapeDecoration(
-            shape: CircleBorder(),
-            color: Colors.white,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.card_membership),
-            color: Colors.red,
-            onPressed: () {},
-          ),
-        ),
-      ),
-      Container(
-        child: Ink(
-          decoration: const ShapeDecoration(
-            shape: CircleBorder(),
-            color: Colors.white,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.add),
-            color: Colors.red,
-            onPressed: () {},
-          ),
-        ),
-      ),
-    ],
-  );
+  // final profileRow = Row(
+  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //   children: <Widget>[
+  //     Container(
+  //       width: 72.0,
+  //       height: 72.0,
+  //       child: Image.asset(
+  //         "images/profile.png",
+  //         fit: BoxFit.fill,
+  //       ),
+  //     ),
+  //     Container(
+  //         margin: EdgeInsets.only(right: 24.0),
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.start,
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: <Widget>[
+  //             Text(
+  //               map['name'],
+  //               style: TextStyle(
+  //                 fontSize: 20.0,
+  //                 color: Colors.white,
+  //                 fontWeight: FontWeight.w800,
+  //               ),
+  //             ),
+  //             Text(
+  //               'name',
+  //               style: TextStyle(
+  //                 fontSize: 16.0,
+  //                 color: Colors.white,
+  //               ),
+  //             ),
+  //           ],
+  //         )),
+  //     Container(
+  //       margin: EdgeInsets.only(left: 48.0),
+  //       child: Ink(
+  //         decoration: const ShapeDecoration(
+  //           shape: CircleBorder(),
+  //           color: Colors.white,
+  //         ),
+  //         child: IconButton(
+  //           icon: const Icon(Icons.card_membership),
+  //           color: Colors.red,
+  //           onPressed: () {},
+  //         ),
+  //       ),
+  //     ),
+  //     Container(
+  //       child: Ink(
+  //         decoration: const ShapeDecoration(
+  //           shape: CircleBorder(),
+  //           color: Colors.white,
+  //         ),
+  //         child: IconButton(
+  //           icon: const Icon(Icons.add),
+  //           color: Colors.red,
+  //           onPressed: () {},
+  //         ),
+  //       ),
+  //     ),
+  //   ],
+  // );
 }

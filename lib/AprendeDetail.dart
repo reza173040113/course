@@ -48,7 +48,7 @@ class _AprendeDetailState extends State<AprendeDetail> {
       setState(() {
         data1=map['courseDetail'];
         data2 = map["globalsituation"];
-        print("data news1 " + data[0]["title"]);
+        // print("data news1 " + data[0]["title"]);
         print(data.length);
       });
     }
@@ -193,7 +193,7 @@ class _AprendeDetailState extends State<AprendeDetail> {
                     Divider(
                       thickness: 4,
                     ),
-                    Row(
+                    data2!=null?Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
@@ -201,10 +201,10 @@ class _AprendeDetailState extends State<AprendeDetail> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("89",
+                              Text(data2[0]['first_date'],
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Completados")
+                              Text("Primiera Fecha inicia",style:TextStyle(fontSize: 10))
                             ],
                           ),
                         ),
@@ -213,10 +213,10 @@ class _AprendeDetailState extends State<AprendeDetail> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("9",
+                              Text(data2[0]['end_date'],
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Pendients")
+                              Text("Primiera Fecha inicia",style:TextStyle(fontSize: 10))
                             ],
                           ),
                         ),
@@ -225,15 +225,15 @@ class _AprendeDetailState extends State<AprendeDetail> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("1306",
+                              Text(data2[0]['last_visit'],
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              Text("Horas Totales")
+                              Text("Primiera Fecha inicia",style:TextStyle(fontSize: 10))
                             ],
                           ),
                         ),
                       ],
-                    ),
+                    ):Center(child: CircularProgressIndicator()),
                     Divider(
                       thickness: 4,
                     ),

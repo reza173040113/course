@@ -7,7 +7,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
 String finalToken;
+int id;
+
 class AprendePage extends StatefulWidget {
   @override
   _AprendePageState createState() => _AprendePageState();
@@ -22,35 +25,42 @@ class _AprendePageState extends State<AprendePage> {
     "Lorem Ipsum",
     "Lorem Ipsum",
   ];
-   var loading = false;
-   List<dynamic> data1;
-  List<dynamic> data2;
+  var loading = false;
+  List<dynamic> data1;
+  List<dynamic> data2; 
+  List<Map<String, dynamic>> data3;
   Map<String, dynamic> map;
   Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var obtainedToken = sharedPreferences.getString("token");
+    int idUser = sharedPreferences.getInt("id");
     setState(() {
       loading = true;
       finalToken = obtainedToken;
+      id = idUser;
     });
     print("token final $finalToken");
+    print("ida user $id");
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/training_passport/58726",
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/training_passport/$id",
         headers: headers);
 
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
+      
       setState(() {
-        data1=map['courseDetail'];
+        data1 = map['courseDetail'];
         data2 = map["globalsituation"];
-        print("data news1 " + data[0]["title"]);
-        print(data.length);
+        //  data3=List<Map<String, dynamic>>.from(json.decode(responseData.body)['user']);
+        // data3 = map['user'];
+        //  print("data user " + data3[0]['firstname']);
+        // print(data.length);
       });
     }
 
@@ -63,6 +73,7 @@ class _AprendePageState extends State<AprendePage> {
     super.initState();
     getData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +103,42 @@ class _AprendePageState extends State<AprendePage> {
               color: HexColor("#c5281c"),
               padding: EdgeInsets.all(8.0),
               //TODO: Profile Picture's row
-              child: profileRow,
+              child:  Row(
+                      children: <Widget>[
+                        Container(
+                          width: 72.0,
+                          height: 72.0,
+                          child: Image.asset(
+                            "images/profile.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(right: 24.0, left: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "data3[0]['firstname']",
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  'name',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  // : Center(child: CircularProgressIndicator()),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
@@ -156,108 +202,120 @@ class _AprendePageState extends State<AprendePage> {
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 30, right: 10),
-                        width: 120,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: HexColor("#c5281c"), width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
+                  data2 != null
+                      ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("89",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("Completados")
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 30, right: 10),
-                        width: 120,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: HexColor("#c5281c"), width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("9",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("Pendients")
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 10, right: 10),
-                        width: 120,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: HexColor("#c5281c"), width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("27/03/2009",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
                             Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Text("Primera fecha inicia"))
+                              margin: EdgeInsets.only(top: 30, right: 10),
+                              width: 120,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: HexColor("#c5281c"), width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(data2[0]['finished'].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text("Completados")
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30, right: 10),
+                              width: 120,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: HexColor("#c5281c"), width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(data2[0]['pending'].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text("Pendients")
+                                ],
+                              ),
+                            ),
                           ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, right: 10),
-                        width: 120,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: HexColor("#c5281c"), width: 1),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
+                        )
+                      : Center(child: CircularProgressIndicator()),
+                  data2 != null
+                      ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("1306",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("Horas Totales")
+                            Container(
+                              margin: EdgeInsets.only(top: 10, right: 10),
+                              width: 120,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: HexColor("#c5281c"), width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(data2[0]['first_date'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: Text("Primera fecha inicia"))
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 10, right: 10),
+                              width: 120,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: HexColor("#c5281c"), width: 1),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(data2[0]['total_time'].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text("Horas Totales")
+                                ],
+                              ),
+                            ),
                           ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: Text("80.50",
-                          style: TextStyle(fontWeight: FontWeight.bold))),
-                  Container(
-                    margin: EdgeInsets.only(top: 8, left: 5, bottom: 10),
-                    child: LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      lineHeight: 5.0,
-                      percent: 0.8,
-                      backgroundColor: Colors.black,
-                      progressColor: Colors.yellow,
-                    ),
-                  ),
+                        )
+                      : Center(child: CircularProgressIndicator()),
+                  data2 != null
+                      ? Container(
+                          margin: EdgeInsets.only(
+                            top: 10,
+                          ),
+                          child: Text(data2[0]['score'].toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold)))
+                      : Center(child: CircularProgressIndicator()),
+                  data2 != null
+                      ? Container(
+                          margin: EdgeInsets.only(top: 8, left: 5, bottom: 10),
+                          child: LinearPercentIndicator(
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            lineHeight: 5.0,
+                            percent: data2[0]['score'].toDouble(),
+                            backgroundColor: Colors.black,
+                            progressColor: Colors.yellow,
+                          ),
+                        )
+                      : Center(child: CircularProgressIndicator()),
                   Text("Nota media (aprobodas)")
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
+              padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 4.0),
               color: HexColor("#c5281c"),
               child: Text(
                 "Cursos",
@@ -274,44 +332,46 @@ class _AprendePageState extends State<AprendePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(bottom: 10, left: 10),
-                              child: Text(data[index],
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold))),
-                          Container(
-                            margin: EdgeInsets.only(bottom: 10, left: 10),
-                            child: Row(
-                              children: [
-                                Icon(Icons.sanitizer),
-                                Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Text("1.30"),
+                child: data1 != null
+                    ? ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: data1.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(bottom: 10, left: 10),
+                                  child: Text(data1[index]['title'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold))),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 10, left: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.sanitizer),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text(data1[index]['duration']),
+                                    ),
+                                    Icon(Icons.wifi),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text(data1[index]['modality']),
+                                    ),
+                                    Icon(Icons.flag),
+                                    Container(
+                                      child: Text(data1[index]['status']),
+                                    ),
+                                  ],
                                 ),
-                                Icon(Icons.wifi),
-                                Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Text("Online"),
-                                ),
-                                Icon(Icons.flag),
-                                Container(
-                                  child: Text("Completado"),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ));
-                    })),
+                              )
+                            ],
+                          ));
+                        })
+                    : Center(child: CircularProgressIndicator())),
           ],
         ));
   }
