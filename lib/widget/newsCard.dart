@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ListNewsCard extends StatelessWidget {
+  final List list;
+  ListNewsCard({this.list});
   final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G'];
   final List<int> colorCodes = <int>[600, 500, 100];
   @override
@@ -10,12 +12,12 @@ class ListNewsCard extends StatelessWidget {
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.all(8),
-            itemCount: entries.length,
+            itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
               return NewsCard(
                   image:
                       "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
-                  title: "Title",
+                  title: list[index]['title'],
                   subtitle: "Subtitle");
             }));
   }

@@ -1,21 +1,21 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:generali/core/models/news_model.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'widget/newsCard.dart';
+
 String finalToken;
+
 class NewsPage extends StatefulWidget {
   @override
   _NewsPageState createState() => _NewsPageState();
 }
 
 class _NewsPageState extends State<NewsPage> {
-  List<ModelNews> listModel = [];
   var loading = false;
+  List<dynamic> data;
   Future<Null> getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -25,22 +25,21 @@ class _NewsPageState extends State<NewsPage> {
       finalToken = obtainedToken;
     });
     print("token final $finalToken");
-     Map<String, String> headers = {
-      'Accept':'application/json',
+    Map<String, String> headers = {
+      'Accept': 'application/json',
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
         headers: headers);
-        // print("haii"+jsonDecode(responseData.body));
+    // print("haii"+jsonDecode(responseData.body));
     if (responseData.statusCode == 200) {
-      final data = jsonDecode(responseData.body);
-      print(data);
+      Map<String, dynamic> map = json.decode(responseData.body);
+      print(map);
+
       setState(() {
-        for (Map i in data) {
-          listModel.add(ModelNews.fromJson(i));
-        }
-        loading = false;
+        data = map["content"];
+        print("data news1 " + data[0]["title"]);
       });
     }
   }
@@ -53,6 +52,7 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
+    //print("ha" + data[0]['title']);
     return SingleChildScrollView(
       child: Container(
         child: Column(
@@ -88,71 +88,59 @@ class _NewsPageState extends State<NewsPage> {
             //         ))
             //   ],
             // ),
+            // FutureBuilder<List>(
+            //   future: getData(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasError) print(snapshot.error);
+            //     return snapshot.hasData
+            //         ? ListNewsCard(list: snapshot.data)
+            //         : Center(child: CircularProgressIndicator());
+            //   },
+            // ),
             Wrap(
               children: [
-                Container(height: 200, child: ListNewsCard()),
+                // Container(
+                //     height: 200,
+                //     child: Card(
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Expanded(
+                //             child: Container(
+                //               width: 250,
+                //               // height: 100,
+                //               decoration: BoxDecoration(
+                //                 borderRadius: BorderRadius.circular(10),
+                //                 // image: DecorationImage(
+                //                 //   image: NetworkImage("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
+                //                 //   fit: BoxFit.fill,
+                //                 //   alignment: Alignment.topCenter,
+                //                 // ),
+                //               ),
+                //               child: Image.network("https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0"+data[0]['image']),
+                //               // Text('Entry ${entries[index]}'),
+                //             ),
+                //           ),
+                //           Container(
+                //               margin: EdgeInsets.only(left: 10, top: 10),
+                //               child: Text(
+                //                 data[0]['title'],
+                //                 style: TextStyle(fontWeight: FontWeight.bold),
+                //               )),
+                //           SizedBox(
+                //             height: 20,
+                //           ),
+                //           Container(
+                //               margin: EdgeInsets.only(left: 10, bottom: 10),
+                //               child: Text(
+                //                 data[0]['status'],
+                //               )),
+                //         ],
+                //       ),
+                //     )),
                 // loading
                 //     ? Center(child: CircularProgressIndicator())
                 //     :
-                // Container(
-                //     height: 200,
-                //     child: Container(
-                //         height: 120.0,
-                //         child: ListView.builder(
-                //             scrollDirection: Axis.horizontal,
-                //             padding: const EdgeInsets.all(8),
-                //             itemCount: listModel.length,
-                //             itemBuilder: (BuildContext context, int index) {
-                //               final nDataList = listModel[index];
-                //               return ListView.builder(
-                //                 itemBuilder: (BuildContext context, int index) {
-                //                   return Card(
-                //                     child: Column(
-                //                       crossAxisAlignment:
-                //                           CrossAxisAlignment.start,
-                //                       children: nDataList.content.map((c){
-                //                         return Column(
-                //                           children: [
-                //                             Expanded(
-                //                           child: Container(
-                //                             width: 250,
-                //                             // height: 100,
-                //                             decoration: BoxDecoration(
-                //                               borderRadius:
-                //                                   BorderRadius.circular(10),
-                //                               image: DecorationImage(
-                //                                 image: NetworkImage(
-                //                                     "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg"),
-                //                                 fit: BoxFit.fill,
-                //                                 alignment: Alignment.topCenter,
-                //                               ),
-                //                             ),
-                //                             // Text('Entry ${entries[index]}'),
-                //                           ),
-                //                         ),
-                //                         Container(
-                //                             child: Text(
-                //                           "nDataList.fi",
-                //                           style: TextStyle(
-                //                               fontWeight: FontWeight.bold),
-                //                         )),
-                //                         SizedBox(
-                //                           height: 20,
-                //                         ),
-                //                         Container(
-                //                             child: Text(
-                //                           "Subtitle",
-                //                         )),
-                //                           ],
-                //                         );
-                //                       }).toList() 
-                                        
-                                      
-                //                     ),
-                //                   );
-                //                 },
-                //               );
-                //             }))),
               ],
             )
           ],

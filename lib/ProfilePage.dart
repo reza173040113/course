@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<ModelUserProfile> listModel = [];
+  List<dynamic> data;
   var loading = false;
   Future<Null> getData() async {
     final SharedPreferences sharedPreferences =
@@ -34,13 +34,12 @@ class _ProfilePageState extends State<ProfilePage> {
         headers: headers);
         // print("haii"+jsonDecode(responseData.body));
     if (responseData.statusCode == 200) {
-      final data = jsonDecode(responseData.body);
-      print(data);
+       Map<String, dynamic> map = json.decode(responseData.body);
+      print(map);
+
       setState(() {
-        for (Map i in data) {
-          listModel.add(ModelUserProfile.fromJson(i));
-        }
-        loading = false;
+        data = map["filename"];
+        print("data profil " + data[0]["name"]);
       });
     }
   }
