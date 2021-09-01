@@ -76,10 +76,9 @@ class _NewsPageState extends State<NewsPage> {
                               //     "https://precampusgenerali.enzymeadvisinggroup.com/informacion/pictures/courses/101094/PORTADA_CARATULA-08.png");
                               NewsCard(
                                   image:
-                                      "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg" +
-                                          data[index]['image'],
+                                      "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
                                   title: data[index]['title'],
-                                  subtitle: "Subtitle");
+                                  subtitle: data[index]['type']);
                         }))
                 : Center(child: CircularProgressIndicator()),
 
