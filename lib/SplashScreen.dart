@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void startTime() {
     getValidationData().whenComplete(() async {
-      Timer(Duration(seconds: 2),
+      Timer(Duration(seconds: 1),
           () => Get.to(finalToken == null ? LoginPage() : ButtomNavigation()));
     });
   }
@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Image.asset(
           "images/m_logo.png",
-          width: MediaQuery.of(context).size.width * .5,
+          width: MediaQuery.of(context).size.width * .6,
         ),
       ),
     );

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:generali/core/models/news_model.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widget/newsCard.dart';
-
+String finalToken;
 class NewsPage extends StatefulWidget {
   @override
   _NewsPageState createState() => _NewsPageState();
@@ -16,18 +17,25 @@ class _NewsPageState extends State<NewsPage> {
   List<ModelNews> listModel = [];
   var loading = false;
   Future<Null> getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
     setState(() {
       loading = true;
+      finalToken = obtainedToken;
     });
+    print("token final $finalToken");
+     Map<String, String> headers = {
+      'Accept':'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
     final responseData = await http.get(
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
-        headers: {
-          "key": "Accept",
-          "value": "application/json",
-          "type": "text",
-        });
+        headers: headers);
+        // print("haii"+jsonDecode(responseData.body));
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body);
+      print(data);
       setState(() {
         for (Map i in data) {
           listModel.add(ModelNews.fromJson(i));

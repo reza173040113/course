@@ -1,15 +1,55 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import 'LoginPage.dart';
-
+import 'core/models/profile_models.dart';
+String finalToken;
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  List<ModelUserProfile> listModel = [];
+  var loading = false;
+  Future<Null> getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+     Map<String, String> headers = {
+      'Accept':'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/profile",
+        headers: headers);
+        // print("haii"+jsonDecode(responseData.body));
+    if (responseData.statusCode == 200) {
+      final data = jsonDecode(responseData.body);
+      print(data);
+      setState(() {
+        for (Map i in data) {
+          listModel.add(ModelUserProfile.fromJson(i));
+        }
+        loading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
