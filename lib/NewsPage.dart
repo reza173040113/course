@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:generali/widget/newsCard.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 String finalToken;
 
@@ -16,7 +16,7 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   var loading = false;
   List<dynamic> data;
-  Future<Null> getData() async {
+  Future<List<dynamic>> getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var obtainedToken = sharedPreferences.getString("token");
@@ -59,12 +59,34 @@ class _NewsPageState extends State<NewsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            data != null
+                ? Container(
+                    height: 120.0,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.all(8),
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return
+                              // Image.network(
+                              //     "https://precampusgenerali.enzymeadvisinggroup.com/informacion/pictures/courses/101094/PORTADA_CARATULA-08.png");
+                              NewsCard(
+                                  image:
+                                      "https://precampusgenerali.enzymeadvisinggroup.com/" +
+                                          data[index]['image'] +
+                                          "/",
+                                  title: data[index]['title'],
+                                  subtitle: "Subtitle");
+                        }))
+                : Center(child: CircularProgressIndicator()),
+
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: [
             //     Container(
             //         margin: EdgeInsets.only(top: 30, left: 20),
             //         child: Text(
+
             //           "News",
             //           style:
             //               TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -99,6 +121,33 @@ class _NewsPageState extends State<NewsPage> {
             // ),
             Wrap(
               children: [
+                // Text(data[0]["title"]),
+                // FutureBuilder<List<dynamic>>(
+                //   future: _fecthDataUsers(),
+                //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+                //     if (snapshot.hasData) {
+                //       return ListView.builder(
+                //           padding: EdgeInsets.all(10),
+                //           itemCount: snapshot.data.length,
+                //           itemBuilder: (BuildContext context, int index) {
+                //             return ListTile(
+                //               leading: CircleAvatar(
+                //                 radius: 30,
+                //                 backgroundImage:
+                //                     NetworkImage(snapshot.data[index]['image']),
+                //               ),
+                //               title: Text(snapshot.data[index]['title'] +
+                //                   " " +
+                //                   snapshot.data[index]['id']),
+                //               subtitle: Text(snapshot.data[index]['title']),
+                //             );
+                //           });
+                //     } else {
+                //       return Center(child: CircularProgressIndicator());
+                //     }
+                //   },
+                // ),
+
                 // Container(
                 //     height: 200,
                 //     child: Card(
