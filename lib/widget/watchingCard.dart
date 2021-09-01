@@ -30,8 +30,10 @@ class _WatchingCardState extends State<WatchingCard> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
+            // constraints: BoxConstraints(
+            //     minHeight: 79, minWidth: 92, maxHeight: 120, maxWidth: 100),
             width: 92,
-            height: 79,
+            height: 92,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
@@ -42,6 +44,10 @@ class _WatchingCardState extends State<WatchingCard> {
             ),
           ),
           Container(
+              // constraints: BoxConstraints(
+              //     maxHeight: 100, maxWidth: 120, minHeight: 79, minWidth: 92),
+              width: 250,
+              height: 90,
               margin: EdgeInsets.only(bottom: 5),
               padding: EdgeInsets.all(8),
               child: Column(
@@ -50,12 +56,40 @@ class _WatchingCardState extends State<WatchingCard> {
                   Row(
                     children: [
                       SizedBox(
-                        width: 7,
+                        width: 9,
                       ),
-                      Container(
-                        child: Text(
-                          widget.title,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                      Expanded(
+                        child: Wrap(
+                          children: [
+                            // Flexible(
+                            //   child: Text(
+                            //     widget.title,
+                            //     maxLines: 1,
+                            //     softWrap: false,
+                            //     overflow: TextOverflow.ellipsis,
+                            //   ),
+                            // ),
+                            Container(
+                                width: 250,
+                                child: Text(
+                                  widget.title,
+                                  maxLines: 2,
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .caption
+                                      .copyWith(color: Colors.black),
+                                  overflow: TextOverflow.ellipsis,
+                                )),
+                            // Container(
+                            //   child: Text(
+                            //     widget.title,
+                            //     // maxLines: 2,
+                            //     softWrap: false,
+                            //     overflow: TextOverflow.fade,
+                            //     style: TextStyle(fontWeight: FontWeight.bold),
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ),
                     ],

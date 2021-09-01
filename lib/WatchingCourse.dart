@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:generali/widget/watchingCard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String finalToken;
 
 class WatchingCourse extends StatefulWidget {
   @override
@@ -7,6 +12,46 @@ class WatchingCourse extends StatefulWidget {
 }
 
 class _WatchingCourseState extends State<WatchingCourse> {
+  var loading = false;
+  List<dynamic> data;
+  Map<String, dynamic> map;
+  Future getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings?_limit=1000&_page=0&type=course",
+        headers: headers);
+
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
+      setState(() {
+        data = map["content"];
+        print("offering " + data[0]["title"]);
+        print(data.length);
+      });
+    }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -49,7 +94,22 @@ class _WatchingCourseState extends State<WatchingCourse> {
             ),
             Wrap(
               children: [
-                Container(height: 90, child: ListWatchCard()),
+                data != null
+                    ? Container(
+                        height: 90,
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.all(8),
+                            itemCount: data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return WatchingCard(
+                                image: data[index]['image'],
+                                title: data[index]['title'],
+                                subtitle: data[index]['subtopic'],
+                              );
+                            }))
+                    : Center(child: CircularProgressIndicator()),
+                // Text("h")
               ],
             )
           ],

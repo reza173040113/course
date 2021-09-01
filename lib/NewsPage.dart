@@ -39,8 +39,8 @@ class _NewsPageState extends State<NewsPage> {
       print(map);
       setState(() {
         data = map["content"];
-        print("data news1 " + data[0]["title"]);
-        print(data.length);
+        // print("data news1 " + data[0]["title"]);
+        // print(data.length);
       });
     }
 
@@ -65,7 +65,7 @@ class _NewsPageState extends State<NewsPage> {
           children: [
             data != null
                 ? Container(
-                    height: 120.0,
+                    height: 200.0,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.all(8),
@@ -76,8 +76,7 @@ class _NewsPageState extends State<NewsPage> {
                               //     "https://precampusgenerali.enzymeadvisinggroup.com/informacion/pictures/courses/101094/PORTADA_CARATULA-08.png");
                               NewsCard(
                                   image:
-                                      "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg" +
-                                          data[index]['image'],
+                                      "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
                                   title: data[index]['title'],
                                   subtitle: "Subtitle");
                         }))

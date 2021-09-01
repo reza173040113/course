@@ -42,7 +42,7 @@ class _NewsCardState extends State<NewsCard> {
           Expanded(
             child: Container(
               width: 250,
-              // height: 100,
+              height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
@@ -55,16 +55,21 @@ class _NewsCardState extends State<NewsCard> {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(left:10,top:10),
+              width: 250,
               child: Text(
                 widget.title,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                maxLines: 2,
+                style: Theme.of(context)
+                    .primaryTextTheme
+                    .caption
+                    .copyWith(color: Colors.black),
+                overflow: TextOverflow.ellipsis,
               )),
           SizedBox(
             height: 20,
           ),
           Container(
-              margin: EdgeInsets.only(left:10,bottom:10),
+              margin: EdgeInsets.only(left: 10, bottom: 10),
               child: Text(
                 widget.subtitle,
               )),
