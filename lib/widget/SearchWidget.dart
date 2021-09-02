@@ -42,8 +42,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 decoration: InputDecoration(
                   hintText: "Search",
                   hintStyle: TextStyle(
-                      color: Colors.black.withAlpha(150),
-                      fontWeight: FontWeight.bold),
+                      color: Colors.grey[400], fontWeight: FontWeight.bold),
                   border: InputBorder.none,
                 ),
                 onChanged: (String keyword) {},
@@ -62,7 +61,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             child: Icon(
               Icons.search,
-              color: Colors.black.withAlpha(120),
+              color: Colors.white,
             ),
           )
         ],
