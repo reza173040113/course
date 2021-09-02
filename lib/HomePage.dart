@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+import 'package:generali/widget/SearchPage.dart';
 import 'package:generali/widget/SearchWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -59,6 +60,7 @@ class _HomePageState extends State<HomePage> {
             // extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
             resizeToAvoidBottomInset: false,
+
             body: Column(
               children: [
                 Container(
@@ -102,7 +104,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                SearchWidget(),
+                // ExamplePage(),
+                SearchPage(),
                 LeonizatePage(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SearchWidget()));
+                                        builder: (context) => MyApp()));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(right: 30),
@@ -239,6 +242,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget searchBarUI() {
+    List<String> list = [
+      'Baik Sekali',
+      'Baik',
+      'Kurang Baik',
+      'Kurang Baik Sekali'
+    ];
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width,
@@ -302,20 +311,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Kesatu"),
+                    Text("Status"),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: [
-                        DropdownMenuItem<String>(
-                          child: Text("One"),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Text("Two"),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Text("Three"),
-                        ),
-                      ],
+                      items: list
+                          .map((listTitle) => DropdownMenuItem(
+                              value: listTitle, child: Text("$listTitle")))
+                          .toList(),
                       onChanged: (_value) => {
                         print(_value.toString()),
                         setState(() {
@@ -324,128 +326,142 @@ class _HomePageState extends State<HomePage> {
                       },
                       hint: Text("Pilih"),
                     ),
-                    Text("Kedua"), // radio button
+                    Text("Area"),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: [
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Radio(
-                                value: 1,
-                                activeColor: Colors.red,
-                                groupValue: groupValue,
-                                onChanged: (int v) {
-                                  print(v);
-                                  buttonValue(v);
-                                },
-                              ),
-                              Text("1"),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Radio(
-                                value: 2,
-                                activeColor: Colors.red,
-                                groupValue: groupValue,
-                                onChanged: (int v) {
-                                  print(v);
-                                  buttonValue(v);
-                                },
-                              ),
-                              Text("2"),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Radio(
-                                value: 3,
-                                activeColor: Colors.red,
-                                groupValue: groupValue,
-                                onChanged: (int v) {
-                                  print(v);
-                                  buttonValue(v);
-                                },
-                              ),
-                              Text("3"),
-                            ],
-                          ),
-                        ),
-                      ],
+                      items: list
+                          .map((listTitle) => DropdownMenuItem(
+                              value: listTitle, child: Text("$listTitle")))
+                          .toList(),
                       onChanged: (_value) => {
                         print(_value.toString()),
                         setState(() {
                           value = _value;
                         }),
                       },
-                      hint: Text("Pilih lagi"),
+                      hint: Text("Pilih"),
                     ),
-                    Text("Ketiga"), // radio button
+                    Text("Kesatu"),
                     DropdownButton<String>(
                       isExpanded: true,
-                      items: [
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                activeColor: Colors.red,
-                                value: satuVal,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    satuVal = value;
-                                  });
-                                },
-                              ),
-                              Text("1"),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                activeColor: Colors.red,
-                                value: duaVal,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    duaVal = value;
-                                  });
-                                },
-                              ),
-                              Text("2"),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem<String>(
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                activeColor: Colors.red,
-                                value: tigaVal,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    tigaVal = value;
-                                  });
-                                },
-                              ),
-                              Text("3"),
-                            ],
-                          ),
-                        ),
-                      ],
+                      items: list
+                          .map((listTitle) => DropdownMenuItem(
+                              value: listTitle, child: Text("$listTitle")))
+                          .toList(),
                       onChanged: (_value) => {
                         print(_value.toString()),
                         setState(() {
                           value = _value;
                         }),
                       },
-                      hint: Text("Pilih lagi yu"),
+                      hint: Text("Pilih"),
                     ),
+                    // Text("Kedua"), // radio button
+                    // DropdownButton<String>(
+                    //   isExpanded: true,
+                    //   items: [
+                    //     DropdownMenuItem<String>(
+                    //       child: Row(
+                    //         children: [
+                    //           Radio(
+                    //             value: 1,
+                    //             activeColor: Colors.red,
+                    //             groupValue: groupValue,
+                    //             onChanged: (int v) {
+                    //               print(v);
+                    //               buttonValue(v);
+                    //             },
+                    //           ),
+                    //           Text("1"),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     DropdownMenuItem<String>(
+                    //       child: Row(
+                    //         children: [
+                    //           Radio(
+                    //             value: 2,
+                    //             activeColor: Colors.red,
+                    //             groupValue: groupValue,
+                    //             onChanged: (int v) {
+                    //               print(v);
+                    //               buttonValue(v);
+                    //             },
+                    //           ),
+                    //           Text("2"),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     DropdownMenuItem<String>(
+                    //       child: Row(
+                    //         children: [
+                    //           Radio(
+                    //             value: 3,
+                    //             activeColor: Colors.red,
+                    //             groupValue: groupValue,
+                    //             onChanged: (int v) {
+                    //               print(v);
+                    //               buttonValue(v);
+                    //             },
+                    //           ),
+                    //           Text("3"),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    //   onChanged: (_value) => {
+                    //     print(_value.toString()),
+                    //     setState(() {
+                    //       value = _value;
+                    //     }),
+                    //   },
+                    //   hint: Text("Pilih lagi"),
+                    // ),
+                    // Text("Ketiga"), // radio button
+                    // DropdownButton<String>(
+                    //   isExpanded: true,
+                    //   items: [
+                    //     DropdownMenuItem<String>(
+                    //       child: Row(
+                    //         children: [
+                    //           Checkbox(
+                    //             activeColor: Colors.red,
+                    //             value: satuVal,
+                    //             onChanged: (bool value) {
+                    //               setState(() {
+                    //                 satuVal = value;
+                    //               });
+                    //             },
+                    //           ),
+                    //           Text("1"),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     DropdownMenuItem<String>(
+                    //       child: Row(
+                    //         children: [
+                    //           Checkbox(
+                    //             activeColor: Colors.red,
+                    //             value: duaVal,
+                    //             onChanged: (bool value) {
+                    //               setState(() {
+                    //                 duaVal = value;
+                    //               });
+                    //             },
+                    //           ),
+                    //           Text("2"),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    //   onChanged: (_value) => {
+                    //     print(_value.toString()),
+                    //     setState(() {
+                    //       value = _value;
+                    //     }),
+                    //   },
+                    //   hint: Text("Pilih lagi yu"),
+                    // ),
                   ],
                 ),
               ),

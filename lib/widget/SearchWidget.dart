@@ -1,72 +1,90 @@
+//
+
 import 'package:flutter/material.dart';
 
-class SearchWidget extends StatefulWidget {
-  // const SearchWidget({ Key? key }) : super(key: key);
+class SerachWidget extends StatefulWidget {
+  // const SerachWidget({ Key? key }) : super(key: key);
 
   @override
-  _SearchWidgetState createState() => _SearchWidgetState();
+  _SerachWidgetState createState() => _SerachWidgetState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
+class _SerachWidgetState extends State<SerachWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: const EdgeInsets.only(
-      //   top: 4,
-      // ),
-      margin: EdgeInsets.only(
-        left: 14,
-        right: 14,
-      ),
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
+    String value = "";
+    List<String> list = [
+      'Baik Sekali',
+      'Baik',
+      'Kurang Baik',
+      'Kurang Baik Sekali'
+    ];
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Search"),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Expanded(
+        body: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Material(
+            color: Colors.white,
             child: Container(
-              margin: EdgeInsets.only(left: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              // margin: EdgeInsets.all(10),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Search",
-                  hintStyle: TextStyle(
-                      color: Colors.grey[400], fontWeight: FontWeight.bold),
-                  border: InputBorder.none,
-                ),
-                onChanged: (String keyword) {},
+              margin: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.width * 0.8,
+              color: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Status"),
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    items: list
+                        .map((listTitle) => DropdownMenuItem(
+                            value: listTitle, child: Text("$listTitle")))
+                        .toList(),
+                    onChanged: (_value) => {
+                      print(_value.toString()),
+                      setState(() {
+                        value = _value;
+                      }),
+                    },
+                    hint: Text("Pilih"),
+                  ),
+                  Text("Area"),
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    items: list
+                        .map((listTitle) => DropdownMenuItem(
+                            value: listTitle, child: Text("$listTitle")))
+                        .toList(),
+                    onChanged: (_value) => {
+                      print(_value.toString()),
+                      setState(() {
+                        value = _value;
+                      }),
+                    },
+                    hint: Text("Pilih"),
+                  ),
+                  Text("Kesatu"),
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    items: list
+                        .map((listTitle) => DropdownMenuItem(
+                            value: listTitle, child: Text("$listTitle")))
+                        .toList(),
+                    onChanged: (_value) => {
+                      print(_value.toString()),
+                      setState(() {
+                        value = _value;
+                      }),
+                    },
+                    hint: Text("Pilih"),
+                  ),
+                ],
               ),
             ),
           ),
-          Container(
-            // margin: EdgeInsets.all(8),
-            height: 50,
-            width: 60,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.red[900],
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-            ),
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
-    );
+        ));
   }
 }
