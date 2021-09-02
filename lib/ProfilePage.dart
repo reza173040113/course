@@ -39,8 +39,8 @@ class _ProfilePageState extends State<ProfilePage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-
-      setState(() {
+      if(this.mounted){
+setState(() {
         sharedPreferences.setInt("id", map['id']);
         // map = json.decode(responseData.body);
         // print(map);
@@ -49,6 +49,8 @@ class _ProfilePageState extends State<ProfilePage> {
         // print("namaaa " + map['name'] + map['surname']);
         // data = map['aplications'];
       });
+      }
+      
     }
   }
 
@@ -89,40 +91,42 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     padding: EdgeInsets.all(8.0),
                     //TODO: Profile Picture's row
-                    child: Row(
+                    child: map!=null?Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
                           width: 72.0,
                           height: 72.0,
-                          child: Image.asset(
-                            "images/profile.png",
+                          child:map['image'] != null
+                        ? Image.network(
+                            map['image'],
                             fit: BoxFit.fill,
-                          ),
+                          ):Image.asset("images/profile.png", fit: BoxFit.fill)
+                        
                         ),
-                        // map!=null? Container(
-                        //     margin: EdgeInsets.only(right: 24.0),
-                        //     child: Column(
-                        //       mainAxisAlignment: MainAxisAlignment.start,
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: <Widget>[
-                        //         Text(
-                        //           map['name'],
-                        //           style: TextStyle(
-                        //             fontSize: 20.0,
-                        //             color: Colors.white,
-                        //             fontWeight: FontWeight.w800,
-                        //           ),
-                        //         ),
-                        //         Text(
-                        //           map['surname'],
-                        //           style: TextStyle(
-                        //             fontSize: 16.0,
-                        //             color: Colors.white,
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     )):Center(child: CircularProgressIndicator()),
+                        Container(
+                            margin: EdgeInsets.only(right: 24.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  map['name'],
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                Text(
+                                  map['surname'],
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )),
                         Container(
                           margin: EdgeInsets.only(left: 48.0),
                           child: Ink(
@@ -151,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ],
-                    ),
+                    ):Center(child: CircularProgressIndicator()),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),

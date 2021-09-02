@@ -1,23 +1,73 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:generali/Volver.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+String finalToken;
+class CategoryOne extends StatefulWidget {
+  @override
+  State<CategoryOne> createState() => _CategoryOneState();
+}
 
-class CategoryOne extends StatelessWidget {
+class _CategoryOneState extends State<CategoryOne> {
+
   final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
   final List<int> colorCodes = <int>[600, 500, 100];
+ var loading = false;
+  List<dynamic> data;
+  Map<String, dynamic> map;
+  Future getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
+        headers: headers);
+
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
+      setState(() {
+        data = map["content"];
+        print("data news1 " + data[0]["title"]);
+        print(data.length);
+      });
+    }
+
+    // print("haii"+jsonDecode(responseData.body));
+    //
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 120.0,
-        child: ListView.builder(
+        child: data!=null?ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.all(8),
-            itemCount: entries.length,
+            itemCount: data.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Volver()));
+                      MaterialPageRoute(builder: (context) => Volver(id: data[index]['id'],)));
                 },
                 child: Card(
                   child: Column(
@@ -45,7 +95,7 @@ class CategoryOne extends StatelessWidget {
                       Container(
                           margin: EdgeInsets.only(top: 20, left: 10),
                           child: Text(
-                            "Title",
+                            data[index]['title'],
                             style: TextStyle(fontWeight: FontWeight.bold),
                             maxLines: 2,
                           )),
@@ -67,7 +117,7 @@ class CategoryOne extends StatelessWidget {
                             Container(
                                 margin: EdgeInsets.only(left: 10),
                                 child: Text(
-                                  "No Solicitado",
+                                  data[index]['status'],
                                   style: TextStyle(color: Colors.white),
                                 )),
                           ],
@@ -96,7 +146,7 @@ class CategoryOne extends StatelessWidget {
                                       right: 10,
                                     ),
                                     child: Text(
-                                      "Online",
+                                      data[index]['modality'],
                                       style: TextStyle(color: Colors.white),
                                     )),
                               ],
@@ -113,6 +163,6 @@ class CategoryOne extends StatelessWidget {
                   ),
                 ),
               );
-            }));
+            }):Center(child: CircularProgressIndicator()));
   }
 }

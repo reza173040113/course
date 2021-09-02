@@ -3,12 +3,11 @@ import 'package:generali/ChatPage.dart';
 import 'package:generali/LeonizateScrollDetail.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
-
 import 'Category.dart';
 import 'HomePage.dart';
 import 'LeonizatePage.dart';
 import 'WatchingCourse.dart';
-
+String finalToken;
 class RegeneratePage extends StatefulWidget {
   //Getting dni and Passowrd form login
   final String dni, password;
@@ -22,6 +21,7 @@ class RegeneratePage extends StatefulWidget {
 }
 
 class _RegeneratePageState extends State<RegeneratePage> {
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
