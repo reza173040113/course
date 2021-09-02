@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 String finalToken;
+
 class LeonizateScrollDetail extends StatefulWidget {
   @override
   _LeonizateScrollDetailState createState() => _LeonizateScrollDetailState();
@@ -16,7 +17,7 @@ class LeonizateScrollDetail extends StatefulWidget {
 
 class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
   var loading = false;
-   List<dynamic> data1;
+  List<dynamic> data1;
   Map<String, dynamic> map;
   Future getData() async {
     final SharedPreferences sharedPreferences =
@@ -32,16 +33,16 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/training_passport/58726",
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/leonizate",
         headers: headers);
 
     if (responseData.statusCode == 200) {
-      map = json.decode(responseData.body);
-      print(map);
-      setState(() {
-        data1=map['ligadetalle'];
-        
-      });
+      if (this.mounted) {
+        setState(() {
+          map = json.decode(responseData.body);
+          print(map);
+        });
+      }
     }
 
     // print("haii"+jsonDecode(responseData.body));
@@ -53,6 +54,7 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
     super.initState();
     getData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,7 +92,8 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             width: 25,
                             height: 25,
                             decoration: BoxDecoration(
-                                color: HexColor("#c5281c"), shape: BoxShape.circle),
+                                color: HexColor("#c5281c"),
+                                shape: BoxShape.circle),
                             child: Text("?",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20))),
@@ -146,157 +149,167 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 8, left: 5),
-                      child: LinearPercentIndicator(
+                      child: map!=null?LinearPercentIndicator(
                         width: MediaQuery.of(context).size.width * 0.85,
                         lineHeight: 5.0,
-                        percent: 0.0,
+                        percent: map["ligadetalle"]['totalusers'].toDouble()*0.0001,
                         backgroundColor: Colors.grey[300],
                         progressColor: Colors.yellow,
-                      ),
+                      ):Center(child: CircularProgressIndicator()),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
+                    map != null
+                        ? Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          map["ligadetalle"]['usersbronce'].toString(),
+                                          style: TextStyle(
+                                              color: Colors.grey[300]),
+                                        )),
+                                    Container(
+                                        margin:
+                                            EdgeInsets.only(left: 10, top: 5),
+                                        child: Text(
+                                          map["ligadetalle"]['pointsbronce'].toString(),
+                                          style: TextStyle(
+                                              color: Colors.grey[100],
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          "usuarios",
+                                          style: TextStyle(
+                                              color: Colors.grey[100],
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                  ],
+                                ),
+                                Container(
                                   margin: EdgeInsets.only(
-                                    left: 10,
+                                    right: 10,
                                   ),
-                                  child: Text(
-                                    "0 pt",
-                                    style: TextStyle(color: Colors.grey[300]),
-                                  )),
-                              Container(
-                                  margin: EdgeInsets.only(left: 10, top: 5),
-                                  child: Text(
-                                    "967",
-                                    style: TextStyle(
-                                        color: Colors.grey[100],
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                              Container(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            map["ligadetalle"]['usersplata'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[300]),
+                                          )),
+                                      Container(
+                                          margin:
+                                              EdgeInsets.only(left: 10, top: 5),
+                                          child: Text(
+                                            map["ligadetalle"]['pointsplata'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            "usuarios",
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                Container(
                                   margin: EdgeInsets.only(
-                                    left: 10,
+                                    right: 30,
                                   ),
-                                  child: Text(
-                                    "usuarios",
-                                    style: TextStyle(
-                                        color: Colors.grey[100],
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              right: 10,
-                            ),
-                            child: Column(
-                              children: [
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            map["ligadetalle"]['usersoro'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[300]),
+                                          )),
+                                      Container(
+                                          margin:
+                                              EdgeInsets.only(left: 10, top: 5),
+                                          child: Text(
+                                            map["ligadetalle"]['pointsoro'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            "usuarios",
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                  ),
+                                ),
                                 Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "350 pt",
-                                      style: TextStyle(color: Colors.grey[300]),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      "521",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "usuarios",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                  margin: EdgeInsets.only(
+                                    right: 20,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            map["ligadetalle"]['usersmaster'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[300]),
+                                          )),
+                                      Container(
+                                          margin:
+                                              EdgeInsets.only(left: 10, top: 5),
+                                          child: Text(
+                                            map["ligadetalle"]['pointsmaster'].toString(),
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                            left: 10,
+                                          ),
+                                          child: Text(
+                                            "usuarios",
+                                            style: TextStyle(
+                                                color: Colors.grey[100],
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              right: 30,
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "743 pt",
-                                      style: TextStyle(color: Colors.grey[300]),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      "167",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "usuarios",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              right: 20,
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "1015 pt",
-                                      style: TextStyle(color: Colors.grey[300]),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      "97",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                Container(
-                                    margin: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      "usuarios",
-                                      style: TextStyle(
-                                          color: Colors.grey[100],
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          )
+                        : Center(child: CircularProgressIndicator()),
                   ],
                 ),
               ),
@@ -368,13 +381,15 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             margin: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
                               "Total",
-                              style: TextStyle(color: Colors.white,fontSize:16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 10, top: 20),
                             child: Text("0 hours (%)",
-                                style: TextStyle(color: Colors.white,fontSize:16)),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16)),
                           )
                         ]),
                     Container(
@@ -452,13 +467,15 @@ class _LeonizateScrollDetailState extends State<LeonizateScrollDetail> {
                             margin: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
                               "Total",
-                              style: TextStyle(color: Colors.white,fontSize:16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 10, top: 20),
                             child: Text("0 hours (%)",
-                                style: TextStyle(color: Colors.white,fontSize:16)),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16)),
                           )
                         ]),
                     Container(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
@@ -7,9 +9,13 @@ import 'package:generali/widget/SearchPage.dart';
 import 'package:generali/widget/SearchWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'LeonizatePage.dart';
 import 'WatchingCourse.dart';
+
+String finalToken;
 
 class HomePage extends StatefulWidget {
   //Getting dni and Passowrd form login
@@ -43,6 +49,48 @@ class _HomePageState extends State<HomePage> {
         SnackBar(content: Text('$value!')),
       );
     });
+  }
+
+  var loading = false;
+
+  Map<String, dynamic> map;
+  Future<Null> getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/me/profile",
+        headers: headers);
+    // print("haii"+jsonDecode(responseData.body));
+    if (responseData.statusCode == 200) {
+      map = json.decode(responseData.body);
+      print(map);
+
+      setState(() {
+        sharedPreferences.setInt("id", map['id']);
+        // map = json.decode(responseData.body);
+        // print(map);
+        // data=map['name'];
+        // map['surname'];
+        // print("namaaa " + map['name'] + map['surname']);
+        // data = map['aplications'];
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override

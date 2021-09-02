@@ -37,11 +37,13 @@ class _NewsPageState extends State<NewsPage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-      setState(() {
-        data = map["content"];
-        // print("data news1 " + data[0]["title"]);
-        // print(data.length);
-      });
+      if (this.mounted) {
+        setState(() {
+          data = map["content"];
+          // print("data news1 " + data[0]["title"]);
+          // print(data.length);
+        });
+      }
     }
 
     // print("haii"+jsonDecode(responseData.body));
@@ -59,6 +61,7 @@ class _NewsPageState extends State<NewsPage> {
     //print("ha" + data[0]['title']);
     return SingleChildScrollView(
       child: Container(
+        margin: EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

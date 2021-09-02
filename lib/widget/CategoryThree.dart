@@ -8,12 +8,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String finalToken;
 
-class CategoryOne extends StatefulWidget {
+class CategoryThree extends StatefulWidget {
   @override
-  State<CategoryOne> createState() => _CategoryOneState();
+  State<CategoryThree> createState() => _CategoryThreeState();
 }
 
-class _CategoryOneState extends State<CategoryOne> {
+class _CategoryThreeState extends State<CategoryThree> {
   final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
   final List<int> colorCodes = <int>[600, 500, 100];
@@ -34,7 +34,7 @@ class _CategoryOneState extends State<CategoryOne> {
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/new?_limit=1000&_page=0",
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/my-offerings/valued?_limit=1000&_page=0",
         headers: headers);
 
     if (responseData.statusCode == 200) {
@@ -61,24 +61,22 @@ class _CategoryOneState extends State<CategoryOne> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 120.0,
-        child: data != null
-            ? ListView.builder(
+    return data != null
+        ? Container(
+            height: 120.0,
+            child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      if (data[index]['type'] == 'support') {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Volver(
-                                      id: data[index]['id'],
-                                    )));
-                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Volver(
+                                    id: data[index]['id'],
+                                  )));
                     },
                     child: Card(
                       child: Column(
@@ -105,17 +103,13 @@ class _CategoryOneState extends State<CategoryOne> {
                           ),
                           Container(
                               margin: EdgeInsets.only(top: 20, left: 10),
-                              child: Text(
-                                data[index]['title'] != null
-                                    ? data[index]['title']
-                                    : '',
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .caption
-                                    .copyWith(color: Colors.black),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              )),
+                              child: Text(data[index]['title'],
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .caption
+                                      .copyWith(color: Colors.black),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2)),
                           SizedBox(
                             height: 20,
                           ),
@@ -182,7 +176,7 @@ class _CategoryOneState extends State<CategoryOne> {
                       ),
                     ),
                   );
-                })
-            : Center(child: CircularProgressIndicator()));
+                }))
+        : Center(child: CircularProgressIndicator());
   }
 }

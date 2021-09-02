@@ -128,6 +128,7 @@ class _LeozinateScrollState extends State<LeozinateScroll> {
                     Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
+                        enabled:false,
                         cursorColor: Colors.white,
                         obscureText: true,
                         style: TextStyle(color: Colors.white),

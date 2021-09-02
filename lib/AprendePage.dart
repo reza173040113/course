@@ -27,7 +27,7 @@ class _AprendePageState extends State<AprendePage> {
   ];
   var loading = false;
   List<dynamic> data1;
-  List<dynamic> data2; 
+  List<dynamic> data2;
   List<Map<String, dynamic>> data3;
   Map<String, dynamic> map;
   Future getData() async {
@@ -54,14 +54,15 @@ class _AprendePageState extends State<AprendePage> {
       map = json.decode(responseData.body);
       print(map);
       
-      setState(() {
-        data1 = map['courseDetail'];
-        data2 = map["globalsituation"];
-        //  data3=List<Map<String, dynamic>>.from(json.decode(responseData.body)['user']);
-        // data3 = map['user'];
-        //  print("data user " + data3[0]['firstname']);
-        // print(data.length);
-      });
+        setState(() {
+          data1 = map['courseDetail'];
+          data2 = map["globalsituation"];
+          //  data3=List<Map<String, dynamic>>.from(json.decode(responseData.body)['user']);
+          // data3 = map['user'];
+          //  print("data user " + data3[0]['firstname']);
+          // print(data.length);
+        });
+      
     }
 
     // print("haii"+jsonDecode(responseData.body));
@@ -103,42 +104,46 @@ class _AprendePageState extends State<AprendePage> {
               color: HexColor("#c5281c"),
               padding: EdgeInsets.all(8.0),
               //TODO: Profile Picture's row
-              child:  Row(
-                      children: <Widget>[
-                        Container(
-                          width: 72.0,
-                          height: 72.0,
-                          child: Image.asset(
-                            "images/profile.png",
+              child: map != null
+                      ?Row(
+                children: <Widget>[
+                  Container(
+                    width: 72.0,
+                    height: 72.0,
+                    child: map['user']['pathimage'] != null
+                        ? Image.network(
+                            map['user']['pathimage'],
                             fit: BoxFit.fill,
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(right: 24.0, left: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "data3[0]['firstname']",
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                          ):Image.asset("images/profile.png", fit: BoxFit.fill)
+                         
+                  ),
+                   Container(
+                          margin: EdgeInsets.only(right: 24.0, left: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                map['user']['firstname'],
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
                                 ),
-                                Text(
-                                  'name',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
+                              ),
+                              Text(
+                                map['user']['lastname'],
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
                                 ),
-                              ],
-                            )),
-                      ],
-                    ),
-                  // : Center(child: CircularProgressIndicator()),
+                              ),
+                            ],
+                          ))
+                      ,
+                ],
+              ): Center(child: CircularProgressIndicator()),
+              // : Center(child: CircularProgressIndicator()),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),

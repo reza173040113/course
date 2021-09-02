@@ -1,18 +1,69 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:generali/Category.dart';
 import 'package:generali/VideoPlayer.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ButtomNavigation.dart';
+import 'core/models/offering_models.dart';
+
+String finalToken;
 
 class Volver extends StatefulWidget {
+  final int id;
+  Volver({@required this.id});
   @override
   _VolverState createState() => _VolverState();
 }
 
 class _VolverState extends State<Volver> {
+  var loading = false;
+  var body;
+  Map<String, dynamic> map;
+  List<ModelOffering> listModel = [];
+  Future getData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString("token");
+    setState(() {
+      loading = true;
+      finalToken = obtainedToken;
+    });
+    print("token final $finalToken");
+    Map<String, String> headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $finalToken'
+    };
+    final responseData = await http.get(
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/media-support/${widget.id}",
+        headers: headers);
+
+    if (responseData.statusCode == 200) {
+      if (this.mounted) {
+        setState(() {
+          map = json.decode(responseData.body);
+          print(map);
+          // print("data news1 " + data[0]["title"]);
+          // print(data.length);
+        });
+      }
+    }
+
+    // print("dataaaaaaaaaaaaa" + listModel[0].title);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('idd ${widget.id}');
     return Scaffold(
       body: ListView(children: [
         Stack(
@@ -32,56 +83,60 @@ class _VolverState extends State<Volver> {
                 //   height: 10,
                 //   color: Colors.grey,
                 // ),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            // width: 0,
-                            margin: EdgeInsets.only(left: 9, top: 6, bottom: 5),
-                            child: Text(
-                              "Lorem ipsum hallo hello holla",
-                            )),
-                        Container(
-                          child: LinearPercentIndicator(
-                            width: 320.0,
-                            lineHeight: 5.0,
-                            percent: 0.1,
-                            progressColor: Colors.red,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "10%",
-                              style: TextStyle(
-                                  color: Colors.grey[400], fontSize: 11),
-                            ),
-                            SizedBox(
-                              height: 20,
-                              // width: 10,
-                            ),
-                            Text("Iniciado",
-                                style: TextStyle(
-                                    color: Colors.grey[400], fontSize: 11)),
+                map != null
+                    ? Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  // width: 0,
+                                  margin: EdgeInsets.only(
+                                      left: 9, top: 6, bottom: 5),
+                                  child: Text(
+                                    map['title'],
+                                  )),
+                              Container(
+                                child: LinearPercentIndicator(
+                                  width: 320.0,
+                                  lineHeight: 5.0,
+                                  percent: 0.1,
+                                  progressColor: Colors.red,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "10%",
+                                    style: TextStyle(
+                                        color: Colors.grey[400], fontSize: 11),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                    // width: 10,
+                                  ),
+                                  Text("Iniciado",
+                                      style: TextStyle(
+                                          color: Colors.grey[400],
+                                          fontSize: 11)),
 
-                            // Align(
-                            //     child: Container(
-                            //   margin: EdgeInsets.only(left: 9, top: 6, bottom: 5),
-                            //   child: Text("10%"),
-                            // )),
-                            // Align(
-                            //     alignment: Alignment.centerRight,
-                            //     child: Container(
-                            //       color: Colors.blueGrey,
-                            //       child: Text("iniciado"),
-                            //     ))
-                          ],
-                        )
-                      ]),
-                ),
+                                  // Align(
+                                  //     child: Container(
+                                  //   margin: EdgeInsets.only(left: 9, top: 6, bottom: 5),
+                                  //   child: Text("10%"),
+                                  // )),
+                                  // Align(
+                                  //     alignment: Alignment.centerRight,
+                                  //     child: Container(
+                                  //       color: Colors.blueGrey,
+                                  //       child: Text("iniciado"),
+                                  //     ))
+                                ],
+                              )
+                            ]))
+                    : Center(child: CircularProgressIndicator()),
               ]),
             ),
             Positioned(
@@ -90,8 +145,8 @@ class _VolverState extends State<Volver> {
                   children: [
                     IconButton(
                         onPressed: () {
-                           Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ButtomNavigation()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ButtomNavigation()));
                         },
                         icon: Icon(
                           Icons.arrow_back_ios,
@@ -368,9 +423,17 @@ class _VolverState extends State<Volver> {
                           ),
                           Container(
                             child: Wrap(children: [
-                              Text(
-                                  "It is a long established fact that a reader will be",
-                                  style: TextStyle(fontSize: 12)),
+                              map != null
+                                  ? Text(
+                                      map['description'],
+                                      style: Theme.of(context)
+                                          .primaryTextTheme
+                                          .caption
+                                          .copyWith(color: Colors.black),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                    )
+                                  : Center(child: CircularProgressIndicator()),
                             ]),
                           )
                         ],
