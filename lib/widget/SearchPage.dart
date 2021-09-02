@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,8 +15,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   var loading = false;
-  List<dynamic> data;
-  Map<String, dynamic> map;
+  List<dynamic> map;
   Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -37,11 +35,12 @@ class _SearchPageState extends State<SearchPage> {
 
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
-      print(map);
+
+      print(map[0]['Area']);
       setState(() {
-        data = map["content"];
-        print("search " + data[0]["title"]);
-        print(data.length);
+        // data = map["content"];
+        // print("search " + data[0]["title"]);
+        // print(data.length);
       });
     }
 
@@ -143,20 +142,22 @@ class _SearchPageState extends State<SearchPage> {
                       hint: Text("Pilih"),
                     ),
                     Text("Area"),
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      items: list
-                          .map((listTitle) => DropdownMenuItem(
-                              value: listTitle, child: Text("$listTitle")))
-                          .toList(),
-                      onChanged: (_value) => {
-                        print(_value.toString()),
-                        setState(() {
-                          value = _value;
-                        }),
-                      },
-                      hint: Text("Pilih"),
-                    ),
+                    map != null
+                        ? DropdownButton<String>(
+                            isExpanded: true,
+                            items: map.map<DropdownMenuItem<String>>((value) =>
+                                new DropdownMenuItem<String>(
+                                    value: value["Area"],
+                                    child: new Text(value["Area"]))).toList(),
+                            onChanged: (_value) => {
+                              print(_value.toString()),
+                              setState(() {
+                                value = _value;
+                              }),
+                            },
+                            hint: Text("Pilih"),
+                          )
+                        : Center(child: CircularProgressIndicator()),
                     Text("Kesatu"),
                     DropdownButton<String>(
                       isExpanded: true,
@@ -206,7 +207,6 @@ class _ExamplePageState extends State<ExamplePage> {
   // final formKey = new GlobalKey<FormState>();
   // final key = new GlobalKey<ScaffoldState>();
   final TextEditingController _filter = new TextEditingController();
-  final dio = new Dio();
   String _searchText = "";
   List names = new List();
   List filteredNames = new List();
