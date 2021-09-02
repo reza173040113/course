@@ -71,12 +71,14 @@ class _CategoryOneState extends State<CategoryOne> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Volver(
-                                    id: data[index]['id'],
-                                  )));
+                      if (data[index]['type'] == 'support') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Volver(
+                                      id: data[index]['id'],
+                                    )));
+                      }
                     },
                     child: Card(
                       child: Column(

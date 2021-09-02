@@ -53,7 +53,7 @@ class _AprendePageState extends State<AprendePage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-      if (this.mounted) {
+      
         setState(() {
           data1 = map['courseDetail'];
           data2 = map["globalsituation"];
@@ -62,7 +62,7 @@ class _AprendePageState extends State<AprendePage> {
           //  print("data user " + data3[0]['firstname']);
           // print(data.length);
         });
-      }
+      
     }
 
     // print("haii"+jsonDecode(responseData.body));

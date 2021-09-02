@@ -39,18 +39,16 @@ class _ProfilePageState extends State<ProfilePage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-//       if(this.mounted){
-// setState(() {
-//         sharedPreferences.setInt("id", map['id']);
-//         // map = json.decode(responseData.body);
-//         // print(map);
-//         // data=map['name'];
-//         // map['surname'];
-//         // print("namaaa " + map['name'] + map['surname']);
-//         // data = map['aplications'];
-//       });
-//       }
-      
+
+      setState(() {
+        sharedPreferences.setInt("id", map['id']);
+        // map = json.decode(responseData.body);
+        // print(map);
+        // data=map['name'];
+        // map['surname'];
+        // print("namaaa " + map['name'] + map['surname']);
+        // data = map['aplications'];
+      });
     }
   }
 
@@ -91,71 +89,74 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     padding: EdgeInsets.all(8.0),
                     //TODO: Profile Picture's row
-                    child: map!=null?Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: 72.0,
-                          height: 72.0,
-                          child:map['image'] != null
-                        ? Image.network(
-                            map['image'],
-                            fit: BoxFit.fill,
-                          ):Image.asset("images/profile.png", fit: BoxFit.fill)
-                        
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(right: 24.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  map['name'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                    child: map != null
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                  width: 72.0,
+                                  height: 72.0,
+                                  child: map['image'] != null
+                                      ? Image.network(
+                                          map['image'],
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Image.asset("images/profile.png",
+                                          fit: BoxFit.fill)),
+                              Container(
+                                  margin: EdgeInsets.only(right: 24.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        map['name'],
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      Text(
+                                        map['surname'],
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              Container(
+                                margin: EdgeInsets.only(left: 30.0),
+                                child: Ink(
+                                  decoration: const ShapeDecoration(
+                                    shape: CircleBorder(),
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w800,
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.card_membership),
+                                    color: Colors.red,
+                                    onPressed: () {},
                                   ),
                                 ),
-                                Text(
-                                  map['surname'],
-                                  style: TextStyle(
-                                    fontSize: 16.0,
+                              ),
+                              Container(
+                                child: Ink(
+                                  decoration: const ShapeDecoration(
+                                    shape: CircleBorder(),
                                     color: Colors.white,
                                   ),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.add),
+                                    color: Colors.red,
+                                    onPressed: () {},
+                                  ),
                                 ),
-                              ],
-                            )),
-                        Container(
-                          margin: EdgeInsets.only(left: 30.0),
-                          child: Ink(
-                            decoration: const ShapeDecoration(
-                              shape: CircleBorder(),
-                              color: Colors.white,
-                            ),
-                            child: IconButton(
-                              icon: const Icon(Icons.card_membership),
-                              color: Colors.red,
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: Ink(
-                            decoration: const ShapeDecoration(
-                              shape: CircleBorder(),
-                              color: Colors.white,
-                            ),
-                            child: IconButton(
-                              icon: const Icon(Icons.add),
-                              color: Colors.red,
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                      ],
-                    ):Center(child: CircularProgressIndicator()),
+                              ),
+                            ],
+                          )
+                        : Center(child: CircularProgressIndicator()),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
@@ -254,7 +255,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: map['email']!=null?map['email']:''),
+                                        TextSpan(
+                                            text:
+                                                "map['email']!=null?map['email']:''"),
                                       ],
                                     ),
                                   ),
@@ -276,7 +279,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: map['territorial']!=null?map['territorial']:''),
+                                        TextSpan(
+                                            text:
+                                                "map['territorial']!=null?map['territorial']:''"),
                                       ],
                                     ),
                                   ),
@@ -298,7 +303,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: map['territorial']!=null?map['territorial']:''),
+                                        TextSpan(
+                                            text:
+                                                "map['territorial']!=null?map['territorial']:''"),
                                       ],
                                     ),
                                   ),

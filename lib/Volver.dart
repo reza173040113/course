@@ -22,6 +22,7 @@ class Volver extends StatefulWidget {
 class _VolverState extends State<Volver> {
   var loading = false;
   var body;
+  Map<String, dynamic> map;
   List<ModelOffering> listModel = [];
   Future getData() async {
     final SharedPreferences sharedPreferences =
@@ -40,14 +41,13 @@ class _VolverState extends State<Volver> {
         "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/media-support/${widget.id}",
         headers: headers);
 
-    if (responseData.body.isNotEmpty) {
-      final data = jsonDecode(responseData.body);
+    if (responseData.statusCode == 200) {
       if (this.mounted) {
         setState(() {
-          for (Map i in data) {
-            listModel.add(ModelOffering.fromJson(i));
-          }
-          loading = false;
+          map = json.decode(responseData.body);
+          print(map);
+          // print("data news1 " + data[0]["title"]);
+          // print(data.length);
         });
       }
     }
@@ -83,67 +83,60 @@ class _VolverState extends State<Volver> {
                 //   height: 10,
                 //   color: Colors.grey,
                 // ),
-                Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: loading
-                        ? Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: listModel.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final nDataList = listModel[index];
-                              return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        // width: 0,
-                                        margin: EdgeInsets.only(
-                                            left: 9, top: 6, bottom: 5),
-                                        child: Text(
-                                          nDataList.title,
-                                        )),
-                                    Container(
-                                      child: LinearPercentIndicator(
-                                        width: 320.0,
-                                        lineHeight: 5.0,
-                                        percent: 0.1,
-                                        progressColor: Colors.red,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "10%",
-                                          style: TextStyle(
-                                              color: Colors.grey[400],
-                                              fontSize: 11),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                          // width: 10,
-                                        ),
-                                        Text("Iniciado",
-                                            style: TextStyle(
-                                                color: Colors.grey[400],
-                                                fontSize: 11)),
+                map != null
+                    ? Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  // width: 0,
+                                  margin: EdgeInsets.only(
+                                      left: 9, top: 6, bottom: 5),
+                                  child: Text(
+                                    map['title'],
+                                  )),
+                              Container(
+                                child: LinearPercentIndicator(
+                                  width: 320.0,
+                                  lineHeight: 5.0,
+                                  percent: 0.1,
+                                  progressColor: Colors.red,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "10%",
+                                    style: TextStyle(
+                                        color: Colors.grey[400], fontSize: 11),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                    // width: 10,
+                                  ),
+                                  Text("Iniciado",
+                                      style: TextStyle(
+                                          color: Colors.grey[400],
+                                          fontSize: 11)),
 
-                                        // Align(
-                                        //     child: Container(
-                                        //   margin: EdgeInsets.only(left: 9, top: 6, bottom: 5),
-                                        //   child: Text("10%"),
-                                        // )),
-                                        // Align(
-                                        //     alignment: Alignment.centerRight,
-                                        //     child: Container(
-                                        //       color: Colors.blueGrey,
-                                        //       child: Text("iniciado"),
-                                        //     ))
-                                      ],
-                                    )
-                                  ]);
-                            })),
+                                  // Align(
+                                  //     child: Container(
+                                  //   margin: EdgeInsets.only(left: 9, top: 6, bottom: 5),
+                                  //   child: Text("10%"),
+                                  // )),
+                                  // Align(
+                                  //     alignment: Alignment.centerRight,
+                                  //     child: Container(
+                                  //       color: Colors.blueGrey,
+                                  //       child: Text("iniciado"),
+                                  //     ))
+                                ],
+                              )
+                            ]))
+                    : Center(child: CircularProgressIndicator()),
               ]),
             ),
             Positioned(
@@ -430,9 +423,17 @@ class _VolverState extends State<Volver> {
                           ),
                           Container(
                             child: Wrap(children: [
-                              Text(
-                                  "It is a long established fact that a reader will be",
-                                  style: TextStyle(fontSize: 12)),
+                              map != null
+                                  ? Text(
+                                      map['description'],
+                                      style: Theme.of(context)
+                                          .primaryTextTheme
+                                          .caption
+                                          .copyWith(color: Colors.black),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                    )
+                                  : Center(child: CircularProgressIndicator()),
                             ]),
                           )
                         ],
