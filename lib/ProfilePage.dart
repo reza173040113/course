@@ -39,17 +39,17 @@ class _ProfilePageState extends State<ProfilePage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-      if(this.mounted){
-setState(() {
-        sharedPreferences.setInt("id", map['id']);
-        // map = json.decode(responseData.body);
-        // print(map);
-        // data=map['name'];
-        // map['surname'];
-        // print("namaaa " + map['name'] + map['surname']);
-        // data = map['aplications'];
-      });
-      }
+//       if(this.mounted){
+// setState(() {
+//         sharedPreferences.setInt("id", map['id']);
+//         // map = json.decode(responseData.body);
+//         // print(map);
+//         // data=map['name'];
+//         // map['surname'];
+//         // print("namaaa " + map['name'] + map['surname']);
+//         // data = map['aplications'];
+//       });
+//       }
       
     }
   }
@@ -128,7 +128,7 @@ setState(() {
                               ],
                             )),
                         Container(
-                          margin: EdgeInsets.only(left: 48.0),
+                          margin: EdgeInsets.only(left: 30.0),
                           child: Ink(
                             decoration: const ShapeDecoration(
                               shape: CircleBorder(),
@@ -254,7 +254,7 @@ setState(() {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: "\tSomeTextHere"),
+                                        TextSpan(text: map['email']!=null?map['email']:''),
                                       ],
                                     ),
                                   ),
@@ -276,7 +276,7 @@ setState(() {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: "\tSomeTextHere"),
+                                        TextSpan(text: map['territorial']!=null?map['territorial']:''),
                                       ],
                                     ),
                                   ),
@@ -298,7 +298,7 @@ setState(() {
                                             color: Colors.red,
                                           ),
                                         ),
-                                        TextSpan(text: "\tSomeTextHere"),
+                                        TextSpan(text: map['territorial']!=null?map['territorial']:''),
                                       ],
                                     ),
                                   ),

@@ -42,12 +42,14 @@ class _VolverState extends State<Volver> {
 
     if (responseData.body.isNotEmpty) {
       final data = jsonDecode(responseData.body);
-      setState(() {
-        for (Map i in data) {
-          listModel.add(ModelOffering.fromJson(i));
-        }
-        loading = false;
-      });
+      if (this.mounted) {
+        setState(() {
+          for (Map i in data) {
+            listModel.add(ModelOffering.fromJson(i));
+          }
+          loading = false;
+        });
+      }
     }
 
     // print("dataaaaaaaaaaaaa" + listModel[0].title);

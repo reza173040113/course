@@ -7,7 +7,9 @@ import 'Category.dart';
 import 'HomePage.dart';
 import 'LeonizatePage.dart';
 import 'WatchingCourse.dart';
+
 String finalToken;
+
 class RegeneratePage extends StatefulWidget {
   //Getting dni and Passowrd form login
   final String dni, password;
@@ -21,7 +23,6 @@ class RegeneratePage extends StatefulWidget {
 }
 
 class _RegeneratePageState extends State<RegeneratePage> {
- 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,55 +38,71 @@ class _RegeneratePageState extends State<RegeneratePage> {
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
 
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            "images/m_logo.png",
-                            width: 120.0,
-                            height: 120.0,
-                          ),
-                          Container(
-                              child: Row(
-                            children: [
-                              IconButton(
-                                color: Colors.white,
-                                icon:
-                                    Image.asset('images/tutor_icon_white.png'),
-                                onPressed: () {
-                                  navigateToNextScreen(context);
-                                },
-                              ),
-                              IconButton(
-                                color: Colors.white,
-                                icon: Icon(Icons.notifications),
-                                onPressed: () {
-                                  navigateToNextScreen(context);
-                                },
-                              ),
-                              IconButton(
-                                color: Colors.white,
-                                icon: Image.asset('images/profile.png'),
-                                onPressed: () {
-                                  navigateToProfileScreen(context);
-                                },
-                              ),
-                            ],
-                          )),
-                        ],
-                      ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          "images/m_logo.png",
+                          width: 120.0,
+                          height: 120.0,
+                        ),
+                        Container(
+                            child: Row(
+                          children: [
+                            IconButton(
+                              color: Colors.white,
+                              icon: Image.asset('images/tutor_icon_white.png'),
+                              onPressed: () {
+                                navigateToNextScreen(context);
+                              },
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(Icons.notifications),
+                              onPressed: () {
+                                navigateToNextScreen(context);
+                              },
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Image.asset('images/profile.png'),
+                              onPressed: () {
+                                navigateToProfileScreen(context);
+                              },
+                            ),
+                          ],
+                        )),
+                      ],
                     ),
                   ),
-                  
-                  Category(),
-                ],
-              ),
+                ),
+                Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      left: 10,
+                    ),
+                    child: Text(
+                      "Courses Category One",
+                      style: TextStyle(color: Colors.white, fontSize: 26),
+                    )),
+                Container(
+                    child: Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    children: [
+                      Category(),
+                    ],
+                  ),
+                )),
+              ],
             ),
 
             //TODO: bg

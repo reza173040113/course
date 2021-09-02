@@ -35,11 +35,13 @@ class _WatchingCourseState extends State<WatchingCourse> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-      setState(() {
-        data = map["content"];
-        print("offering " + data[0]["title"]);
-        print(data.length);
-      });
+      if (this.mounted) {
+        setState(() {
+          data = map["content"];
+          print("offering " + data[0]["title"]);
+          print(data.length);
+        });
+      }
     }
 
     // print("haii"+jsonDecode(responseData.body));
@@ -103,7 +105,8 @@ class _WatchingCourseState extends State<WatchingCourse> {
                             itemCount: data.length,
                             itemBuilder: (BuildContext context, int index) {
                               return WatchingCard(
-                                image: data[index]['image'],
+                                image:
+                                    "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
                                 title: data[index]['title'],
                                 subtitle: data[index]['subtopic'],
                               );
