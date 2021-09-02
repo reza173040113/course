@@ -68,7 +68,7 @@ class _NewsPageState extends State<NewsPage> {
           children: [
             data != null
                 ? Container(
-                    height: 200.0,
+                    height: 210.0,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.all(8),

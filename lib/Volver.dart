@@ -188,11 +188,13 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  Container(
-                    child: Text("3:00",
-                        style:
-                            TextStyle(fontSize: 11, color: Colors.grey[400])),
-                  )
+                  map['duration'] != null
+                      ? Container(
+                          child: Text(map['duration'],
+                              style: TextStyle(
+                                  fontSize: 11, color: Colors.grey[400])),
+                        )
+                      : Center(child: CircularProgressIndicator()),
                 ],
               ),
               Column(
@@ -210,11 +212,13 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  Container(
-                    child: Text("Online",
-                        style:
-                            TextStyle(fontSize: 11, color: Colors.grey[400])),
-                  )
+                  map['type'] != null
+                      ? Container(
+                          child: Text(map['type'],
+                              style: TextStyle(
+                                  fontSize: 11, color: Colors.grey[400])),
+                        )
+                      : Center(child: CircularProgressIndicator()),
                 ],
               ),
               Column(

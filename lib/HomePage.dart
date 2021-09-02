@@ -169,12 +169,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyApp()));
-                              },
+                              onTap: () {},
                               child: Container(
                                 margin: EdgeInsets.only(right: 30),
                                 child: Text("View",

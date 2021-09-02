@@ -85,40 +85,37 @@ class _CategoryOneState extends State<CategoryOne> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Container(
-                              width: 200,
-                              // height: 100,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10)),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg"),
-                                  fit: BoxFit.fill,
-                                  alignment: Alignment.topCenter,
-                                ),
+                          Container(
+                            width: 220,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  topLeft: Radius.circular(10)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg"),
+                                fit: BoxFit.fill,
+                                alignment: Alignment.topCenter,
                               ),
-                              // Text('Entry ${entries[index]}'),
                             ),
+                            // Text('Entry ${entries[index]}'),
                           ),
                           Container(
-                              margin: EdgeInsets.only(top: 20, left: 10),
+                              // margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(8),
+                              width: 220,
                               child: Text(
                                 data[index]['title'] != null
                                     ? data[index]['title']
                                     : '',
+                                maxLines: 2,
                                 style: Theme.of(context)
                                     .primaryTextTheme
                                     .caption
                                     .copyWith(color: Colors.black),
                                 overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
                               )),
-                          SizedBox(
-                            height: 20,
-                          ),
                           Container(
                             padding: EdgeInsets.only(left: 5, right: 5),
                             margin: EdgeInsets.only(bottom: 10),

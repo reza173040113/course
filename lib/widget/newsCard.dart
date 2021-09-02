@@ -39,23 +39,22 @@ class _NewsCardState extends State<NewsCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Container(
-              width: 250,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: NetworkImage(widget.image),
-                  fit: BoxFit.fill,
-                  alignment: Alignment.topCenter,
-                ),
+          Container(
+            width: 220,
+            height: 110,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: NetworkImage(widget.image),
+                fit: BoxFit.fill,
+                alignment: Alignment.topCenter,
               ),
-              // Text('Entry ${entries[index]}'),
             ),
+            // Text('Entry ${entries[index]}'),
           ),
           Container(
-              width: 250,
+              padding: EdgeInsets.only(left: 8, top: 8, bottom: 10),
+              width: 220,
               child: Text(
                 widget.title,
                 maxLines: 2,
@@ -65,11 +64,10 @@ class _NewsCardState extends State<NewsCard> {
                     .copyWith(color: Colors.black),
                 overflow: TextOverflow.ellipsis,
               )),
-          SizedBox(
-            height: 20,
-          ),
           Container(
-              margin: EdgeInsets.only(left: 10, bottom: 10),
+              margin: EdgeInsets.only(
+                left: 10,
+              ),
               child: Text(
                 widget.subtitle,
               )),
