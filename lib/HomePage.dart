@@ -153,7 +153,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 // ExamplePage(),
-                SearchPage(),
                 LeonizatePage(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,7 +203,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 480),
+            margin: EdgeInsets.only(top: 450),
             child: ListView(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
@@ -212,6 +211,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Stack(children: [
+            SearchPage(),
+
             // Container(
             //   margin: EdgeInsets.only(
             //     left: 20,

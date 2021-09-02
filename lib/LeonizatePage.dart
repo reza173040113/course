@@ -29,7 +29,7 @@ class _LeonizatePageState extends State<LeonizatePage> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 30),
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 20),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

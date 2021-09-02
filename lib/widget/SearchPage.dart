@@ -126,22 +126,22 @@ class _SearchPageState extends State<SearchPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Status"),
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      items: list
-                          .map((listTitle) => DropdownMenuItem(
-                              value: listTitle, child: Text("$listTitle")))
-                          .toList(),
-                      onChanged: (_value) => {
-                        print(_value.toString()),
-                        setState(() {
-                          value = _value;
-                        }),
-                      },
-                      hint: Text("Pilih"),
-                    ),
-                    Text("Area"),
+                    // Text("Status"),
+                    // DropdownButton<String>(
+                    //   isExpanded: true,
+                    //   items: list
+                    //       .map((listTitle) => DropdownMenuItem(
+                    //           value: listTitle, child: Text("$listTitle")))
+                    //       .toList(),
+                    //   onChanged: (_value) => {
+                    //     print(_value.toString()),
+                    //     setState(() {
+                    //       value = _value;
+                    //     }),
+                    //   },
+                    //   hint: Text("Pilih"),
+                    // ),
+                    Text("Area",style:TextStyle(color: Colors.red)),
                     map != null
                         ? DropdownButton<String>(
                             isExpanded: true,
@@ -155,24 +155,24 @@ class _SearchPageState extends State<SearchPage> {
                                 value = _value;
                               }),
                             },
-                            hint: Text("Pilih"),
+                            hint: Text("Selleciona"),
                           )
                         : Center(child: CircularProgressIndicator()),
-                    Text("Kesatu"),
-                    DropdownButton<String>(
-                      isExpanded: true,
-                      items: list
-                          .map((listTitle) => DropdownMenuItem(
-                              value: listTitle, child: Text("$listTitle")))
-                          .toList(),
-                      onChanged: (_value) => {
-                        print(_value.toString()),
-                        setState(() {
-                          value = _value;
-                        }),
-                      },
-                      hint: Text("Pilih"),
-                    ),
+                    // Text("Kesatu"),
+                    // DropdownButton<String>(
+                    //   isExpanded: true,
+                    //   items: list
+                    //       .map((listTitle) => DropdownMenuItem(
+                    //           value: listTitle, child: Text("$listTitle")))
+                    //       .toList(),
+                    //   onChanged: (_value) => {
+                    //     print(_value.toString()),
+                    //     setState(() {
+                    //       value = _value;
+                    //     }),
+                    //   },
+                    //   hint: Text("Pilih"),
+                    // ),
                   ],
                 ),
               ),
