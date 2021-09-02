@@ -52,6 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           Container(
             // margin: EdgeInsets.all(8),
             height: 50,
+            width: 60,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.red[900],
