@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generali/ChatPage.dart';
 import 'package:generali/NewsPage.dart';
 import 'package:generali/ProfilePage.dart';
+import 'package:generali/widget/SearchWidget.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -101,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                SearchWidget(),
                 LeonizatePage(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,11 +118,19 @@ class _HomePageState extends State<HomePage> {
                         margin: EdgeInsets.only(top: 30, right: 20),
                         child: Row(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 30),
-                              child: Text("View",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.red)),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SearchWidget()));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 30),
+                                child: Text("View",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.red)),
+                              ),
                             ),
                             Image.asset(
                               "images/App_Assets/right-nav-active.png",
