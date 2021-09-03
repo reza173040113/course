@@ -5,7 +5,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class SearchCardOrder extends StatefulWidget {
   final String image, title, subtitle;
-  final int rating;
+  final num rating;
 
   const SearchCardOrder(
       {Key key, this.image, this.title, this.subtitle, this.rating})

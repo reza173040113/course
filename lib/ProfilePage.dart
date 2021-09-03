@@ -37,9 +37,11 @@ class _ProfilePageState extends State<ProfilePage> {
         headers: headers);
     // print("haii"+jsonDecode(responseData.body));
     if (responseData.statusCode == 200) {
-      map = json.decode(responseData.body);
-      print(map);
-      print(map['name']+map['surname']+map['email']);
+      setState(() {
+        map = json.decode(responseData.body);
+        print(map);
+        print(map['name'] + map['surname'] + map['email']);
+      });
     }
   }
 
@@ -224,86 +226,84 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             print("Card Tapped");
                           },
-                          child: map!=null?SizedBox(
-                            child: Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Text.rich(
-                                    TextSpan(
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      children: [
-                                        WidgetSpan(
-                                          child: Icon(
-                                            Icons.email,
-                                            color: Colors.red,
+                          child: map != null
+                              ? SizedBox(
+                                  child: Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text.rich(
+                                          TextSpan(
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            children: [
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.email,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                              TextSpan(text: map['email']),
+                                            ],
                                           ),
                                         ),
-                                        TextSpan(
-                                            text:
-                                                map['email']),
+                                        Divider(
+                                          color: Colors.blueGrey.withAlpha(30),
+                                          thickness: 2.0,
+                                        ),
+                                        Text.rich(
+                                          TextSpan(
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            children: [
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.phone_android,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                  text: map['territorial']),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.blueGrey.withAlpha(30),
+                                          thickness: 2.0,
+                                        ),
+                                        Text.rich(
+                                          TextSpan(
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            children: [
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.link,
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                              TextSpan(text: map['department']),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                  Divider(
-                                    color: Colors.blueGrey.withAlpha(30),
-                                    thickness: 2.0,
-                                  ),
-                                  Text.rich(
-                                    TextSpan(
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      children: [
-                                        WidgetSpan(
-                                          child: Icon(
-                                            Icons.phone_android,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                            text:
-                                                map['territorial']),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.blueGrey.withAlpha(30),
-                                    thickness: 2.0,
-                                  ),
-                                  Text.rich(
-                                    TextSpan(
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      children: [
-                                        WidgetSpan(
-                                          child: Icon(
-                                            Icons.link,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                            text:
-                                                map['department']),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ):Center(child: CircularProgressIndicator()),
+                                )
+                              : Center(child: CircularProgressIndicator()),
                         ),
                       ),
                     ),
