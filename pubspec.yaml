@@ -41,6 +41,8 @@ dependencies:
   firebase_messaging:
   flutter_local_notifications: 
   cached_network_image: 
+  smooth_star_rating: ^1.1.1
+
 
 
 

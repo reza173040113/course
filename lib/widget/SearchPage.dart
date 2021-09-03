@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:generali/widget/SearchDetailArea.dart';
+import 'package:generali/widget/SearchDetailOrder.dart';
+import 'package:generali/widget/SearchDetailStatus.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -16,8 +19,17 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   var loading = false;
   List<dynamic> map;
-  List<String> status = ['finalizado', 'inicado', 'por iniciar', 'ofertado'];
-  List<String> order = ['novedades', 'populares', 'mas valorados', 'ofertado'];
+  List<String> status = [
+    'Finalizado',
+    'Inicado',
+    'Por iniciar',
+    'Ofertado',
+    'Solicitado',
+    'Aceptado',
+    'Consultado',
+    'No consultado'
+  ];
+  List<String> order = ['Novedades', 'Populares', 'Mas valorados', 'Ofertado'];
   Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -39,11 +51,6 @@ class _SearchPageState extends State<SearchPage> {
       map = json.decode(responseData.body);
 
       print(map[0]['Area']);
-      setState(() {
-        // data = map["content"];
-        // print("search " + data[0]["title"]);
-        // print(data.length);
-      });
     }
 
     // print("haii"+jsonDecode(responseData.body));
@@ -158,6 +165,13 @@ class _SearchPageState extends State<SearchPage> {
                               print(_value.toString()),
                               setState(() {
                                 value = _value;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchDetailArea(
+                                              area: _value,
+                                            )));
                               }),
                             },
                             hint: Text("Selleciona"),
@@ -174,6 +188,12 @@ class _SearchPageState extends State<SearchPage> {
                         print(_value.toString()),
                         setState(() {
                           value = _value;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchDetailStatus(
+                                        status: _value,
+                                      )));
                         }),
                       },
                       hint: Text("Selleciona"),
@@ -189,6 +209,12 @@ class _SearchPageState extends State<SearchPage> {
                         print(_value.toString()),
                         setState(() {
                           value = _value;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchDetailOrder(
+                                        order: _value,
+                                      )));
                         }),
                       },
                       hint: Text("Selleciona"),

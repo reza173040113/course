@@ -188,7 +188,7 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  map['duration'] != null
+                  map != null
                       ? Container(
                           child: Text(map['duration'],
                               style: TextStyle(
@@ -212,7 +212,7 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  map['type'] != null
+                  map != null
                       ? Container(
                           child: Text(map['type'],
                               style: TextStyle(
@@ -456,6 +456,8 @@ class _VolverState extends State<Volver> {
                             color: Colors.red[900],
                           ),
                           Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            margin: EdgeInsets.only(left: 5, top: 10),
                             child: Wrap(children: [
                               map != null
                                   ? Text(
