@@ -8,15 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'SearchCard.dart';
 
 String finalToken;
-class SearchDetailOrder extends StatefulWidget {
-  final String order;
-  SearchDetailOrder({@required this.order});
+class SearchDetailType extends StatefulWidget {
+  final String type;
+  SearchDetailType({@required this.type});
 
   @override
-  _SearchDetailOrderState createState() => _SearchDetailOrderState();
+  _SearchDetailTypeState createState() => _SearchDetailTypeState();
 }
 
-class _SearchDetailOrderState extends State<SearchDetailOrder> {
+class _SearchDetailTypeState extends State<SearchDetailType> {
    var loading = false;
   List<dynamic> data;
   Map<String, dynamic> map;
@@ -34,7 +34,7 @@ class _SearchDetailOrderState extends State<SearchDetailOrder> {
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/search?_limit=1000&_page=0&order='${widget.order}'",
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/search?_limit=1000&_page=0&type='${widget.type}'",
         headers: headers);
 
     if (responseData.statusCode == 200) {

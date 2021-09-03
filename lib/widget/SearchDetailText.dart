@@ -8,15 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'SearchCard.dart';
 
 String finalToken;
-class SearchDetailOrder extends StatefulWidget {
-  final String order;
-  SearchDetailOrder({@required this.order});
+class SearchDetailText extends StatefulWidget {
+  final String text;
+  SearchDetailText({@required this.text});
 
   @override
-  _SearchDetailOrderState createState() => _SearchDetailOrderState();
+  _SearchDetailTextState createState() => _SearchDetailTextState();
 }
 
-class _SearchDetailOrderState extends State<SearchDetailOrder> {
+class _SearchDetailTextState extends State<SearchDetailText> {
    var loading = false;
   List<dynamic> data;
   Map<String, dynamic> map;
@@ -34,7 +34,7 @@ class _SearchDetailOrderState extends State<SearchDetailOrder> {
       'Authorization': 'Bearer $finalToken'
     };
     final responseData = await http.get(
-        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/search?_limit=1000&_page=0&order='${widget.order}'",
+        "https://precampusgenerali.enzymeadvisinggroup.com/api2/api/v2/search?_limit=1000&_page=0&text=${widget.text}",
         headers: headers);
 
     if (responseData.statusCode == 200) {
@@ -68,7 +68,7 @@ class _SearchDetailOrderState extends State<SearchDetailOrder> {
               padding: const EdgeInsets.all(8),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
-                return SearchCard(
+                return SearchCardOrder(
                   image:
                       "https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg",
                   title: data[index]['title'],

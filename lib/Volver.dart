@@ -221,7 +221,7 @@ class _VolverState extends State<Volver> {
                       : Center(child: CircularProgressIndicator()),
                 ],
               ),
-              Column(
+              map!=null?Column(
                 children: [
                   Align(
                     alignment: Alignment.center,
@@ -237,13 +237,13 @@ class _VolverState extends State<Volver> {
                     ),
                   ),
                   Container(
-                    child: Text("Habilidades",
+                    child: Text(map['views'].toString(),
                         style:
                             TextStyle(fontSize: 11, color: Colors.grey[400])),
                   )
                 ],
-              ),
-              Column(
+              ):Center(child: CircularProgressIndicator()),
+              map!=null?Column(
                 children: [
                   Align(
                     alignment: Alignment.center,
@@ -259,12 +259,12 @@ class _VolverState extends State<Volver> {
                     ),
                   ),
                   Container(
-                    child: Text("Liderazgo",
+                    child: Text(map['viewed'].toString(),
                         style:
                             TextStyle(fontSize: 11, color: Colors.grey[400])),
                   )
                 ],
-              ),
+              ):Center(child: CircularProgressIndicator()),
             ],
           ),
         ),
@@ -274,119 +274,119 @@ class _VolverState extends State<Volver> {
           color: Colors.grey[400],
         ),
 
-        DefaultTabController(
-            length: 3, // length of tabs
-            initialIndex: 0,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    child: TabBar(
-                      labelColor: Colors.green,
-                      unselectedLabelColor: Colors.black,
-                      tabs: [
-                        Tab(text: 'Contenidos'),
-                        Tab(text: 'Compatibilidad'),
-                        Tab(text: 'Observaciones'),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      height: 300, //height of TabBarView
-                      decoration: BoxDecoration(
-                          border: Border(
-                              top: BorderSide(
-                                  color: Colors.grey[400], width: 5))),
-                      child: TabBarView(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  for (int i = 0; i < 5; i++)
-                                    Container(
-                                        margin: EdgeInsets.only(bottom: 5),
-                                        child: Icon(Icons.star,
-                                            size: 14, color: Colors.yellow))
-                                ],
-                              ),
-                              for (int i = 1; i <= 5; i++)
-                                Container(
-                                  margin: EdgeInsets.all(10),
-                                  child: Text(
-                                      i.toString() +
-                                          '. Display Tab ' +
-                                          i.toString(),
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
-                                ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoApp()));
-                                },
-                                child: Container(
-                                  width: 150,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Colors.red[900],
-                                  ),
-                                  child: Center(
-                                      child: Text("Accede al soporte",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ))),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (int i = 1; i <= 5; i++)
-                                Container(
-                                  margin: EdgeInsets.all(10),
-                                  child: Text(
-                                      i.toString() +
-                                          '. Display Tab ' +
-                                          i.toString(),
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
-                                ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (int i = 1; i <= 5; i++)
-                                Container(
-                                  margin: EdgeInsets.all(10),
-                                  child: Text(
-                                      i.toString() +
-                                          '. Display Tab ' +
-                                          i.toString(),
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ]))
-                ])),
+        // DefaultTabController(
+        //     length: 3, // length of tabs
+        //     initialIndex: 0,
+        //     child: Column(
+        //         crossAxisAlignment: CrossAxisAlignment.stretch,
+        //         children: <Widget>[
+        //           Container(
+        //             child: TabBar(
+        //               labelColor: Colors.green,
+        //               unselectedLabelColor: Colors.black,
+        //               tabs: [
+        //                 Tab(text: 'Contenidos'),
+        //                 Tab(text: 'Compatibilidad'),
+        //                 Tab(text: 'Observaciones'),
+        //               ],
+        //             ),
+        //           ),
+        //           Container(
+        //               height: 300, //height of TabBarView
+        //               decoration: BoxDecoration(
+        //                   border: Border(
+        //                       top: BorderSide(
+        //                           color: Colors.grey[400], width: 5))),
+        //               child: TabBarView(children: <Widget>[
+        //                 Container(
+        //                   margin: EdgeInsets.all(15),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.start,
+        //                     children: [
+        //                       Row(
+        //                         children: [
+        //                           for (int i = 0; i < 5; i++)
+        //                             Container(
+        //                                 margin: EdgeInsets.only(bottom: 5),
+        //                                 child: Icon(Icons.star,
+        //                                     size: 14, color: Colors.yellow))
+        //                         ],
+        //                       ),
+        //                       for (int i = 1; i <= 5; i++)
+        //                         Container(
+        //                           margin: EdgeInsets.all(10),
+        //                           child: Text(
+        //                               i.toString() +
+        //                                   '. Display Tab ' +
+        //                                   i.toString(),
+        //                               style: TextStyle(
+        //                                 fontSize: 15,
+        //                               )),
+        //                         ),
+        //                       GestureDetector(
+        //                         onTap: () {
+        //                           Navigator.push(
+        //                               context,
+        //                               MaterialPageRoute(
+        //                                   builder: (context) => VideoApp()));
+        //                         },
+        //                         child: Container(
+        //                           width: 150,
+        //                           height: 35,
+        //                           decoration: BoxDecoration(
+        //                             borderRadius: BorderRadius.circular(8),
+        //                             color: Colors.red[900],
+        //                           ),
+        //                           child: Center(
+        //                               child: Text("Accede al soporte",
+        //                                   style: TextStyle(
+        //                                     color: Colors.white,
+        //                                   ))),
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 Container(
+        //                   margin: EdgeInsets.all(15),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.start,
+        //                     children: [
+        //                       for (int i = 1; i <= 5; i++)
+        //                         Container(
+        //                           margin: EdgeInsets.all(10),
+        //                           child: Text(
+        //                               i.toString() +
+        //                                   '. Display Tab ' +
+        //                                   i.toString(),
+        //                               style: TextStyle(
+        //                                 fontSize: 15,
+        //                               )),
+        //                         ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 Container(
+        //                   margin: EdgeInsets.all(15),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.start,
+        //                     children: [
+        //                       for (int i = 1; i <= 5; i++)
+        //                         Container(
+        //                           margin: EdgeInsets.all(10),
+        //                           child: Text(
+        //                               i.toString() +
+        //                                   '. Display Tab ' +
+        //                                   i.toString(),
+        //                               style: TextStyle(
+        //                                 fontSize: 15,
+        //                               )),
+        //                         ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ]))
+        //         ])),
         Container(
           height: 4,
           color: Colors.grey[400],
@@ -499,10 +499,10 @@ class _VolverState extends State<Volver> {
                   SizedBox(
                     width: 20,
                   ),
-                  GestureDetector(
+                  map!=null?GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => VideoApp()));
+                          MaterialPageRoute(builder: (context) => VideoApp(url: map['url'],)));
                     },
                     child: Container(
                       margin: EdgeInsets.only(
@@ -522,7 +522,7 @@ class _VolverState extends State<Volver> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => VideoApp()));
+                                      builder: (context) => VideoApp(url: map['url'],)));
                             },
                             child: Center(
                                 child: Text("Entrar",
@@ -536,7 +536,7 @@ class _VolverState extends State<Volver> {
                         ],
                       ),
                     ),
-                  ),
+                  ):Center(child: CircularProgressIndicator()),
                 ]),
               ),
             ],

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:generali/widget/SearchDetailArea.dart';
 import 'package:generali/widget/SearchDetailOrder.dart';
 import 'package:generali/widget/SearchDetailStatus.dart';
+import 'package:generali/widget/SearchDetailType.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'SearchDetailText.dart';
 
 String finalToken;
 
@@ -30,6 +33,8 @@ class _SearchPageState extends State<SearchPage> {
     'No consultado'
   ];
   List<String> order = ['Novedades', 'Populares', 'Mas valorados', 'Ofertado'];
+  List<String> type = ['course', 'support'];
+  FloatingSearchBarController controller;
   Future getData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -60,6 +65,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
+    controller = FloatingSearchBarController();
     getData();
   }
 
@@ -84,11 +90,23 @@ class _SearchPageState extends State<SearchPage> {
         maxWidth: 500,
         axisAlignment: 0.0,
         backdropColor: Colors.transparent,
+        controller: controller,
         // scrollPadding: EdgeInsets.only(top: 16, bottom: 20),
         elevation: 4.0,
         physics: BouncingScrollPhysics(),
         onQueryChanged: (query) {
           //Your methods will be here
+        },
+        onSubmitted: (query) {
+          setState(() {
+            print(query);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SearchDetailText(
+                          text: query,
+                        )));
+          });
         },
         showDrawerHamburger: false,
         transitionCurve: Curves.easeInOut,
@@ -136,21 +154,27 @@ class _SearchPageState extends State<SearchPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text("Status"),
-                    // DropdownButton<String>(
-                    //   isExpanded: true,
-                    //   items: list
-                    //       .map((listTitle) => DropdownMenuItem(
-                    //           value: listTitle, child: Text("$listTitle")))
-                    //       .toList(),
-                    //   onChanged: (_value) => {
-                    //     print(_value.toString()),
-                    //     setState(() {
-                    //       value = _value;
-                    //     }),
-                    //   },
-                    //   hint: Text("Pilih"),
-                    // ),
+                    Text("Type"),
+                    DropdownButton<String>(
+                      isExpanded: true,
+                      items: type
+                          .map((listTitle) => DropdownMenuItem(
+                              value: listTitle, child: Text("$listTitle")))
+                          .toList(),
+                      onChanged: (_value) => {
+                        print(_value.toString()),
+                        setState(() {
+                          value = _value;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchDetailType(
+                                        type: _value,
+                                      )));
+                        }),
+                      },
+                      hint: Text("Selleciona"),
+                    ),
                     Text("Area", style: TextStyle(color: Colors.red)),
                     map != null
                         ? DropdownButton<String>(
@@ -168,8 +192,7 @@ class _SearchPageState extends State<SearchPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            SearchDetailArea(
+                                        builder: (context) => SearchDetailArea(
                                               area: _value,
                                             )));
                               }),
