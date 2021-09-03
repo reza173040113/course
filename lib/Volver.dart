@@ -76,7 +76,7 @@ class _VolverState extends State<Volver> {
                   child: Container(
                     // child: Image.network(
                     //     "https://images.unsplash.com/photo-1568292342316-60aa3d36f4b3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FscGFwZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
-                    child: VideoApp(),
+                    child: map!=null?VideoApp(url:map['url'] ,):Center(child: CircularProgressIndicator()),
                   ),
                 ),
                 // Container(
@@ -188,7 +188,7 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  map['duration'] != null
+                  map!= null
                       ? Container(
                           child: Text(map['duration'],
                               style: TextStyle(
@@ -212,7 +212,7 @@ class _VolverState extends State<Volver> {
                       //
                     ),
                   ),
-                  map['type'] != null
+                  map!= null
                       ? Container(
                           child: Text(map['type'],
                               style: TextStyle(
@@ -426,6 +426,8 @@ class _VolverState extends State<Volver> {
                             color: Colors.red[900],
                           ),
                           Container(
+                            width: MediaQuery.of(context).size.width*0.8,
+                            margin:EdgeInsets.only(left:5,top:10),
                             child: Wrap(children: [
                               map != null
                                   ? Text(

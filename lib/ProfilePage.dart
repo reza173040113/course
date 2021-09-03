@@ -39,16 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
     if (responseData.statusCode == 200) {
       map = json.decode(responseData.body);
       print(map);
-
-      setState(() {
-        sharedPreferences.setInt("id", map['id']);
-        // map = json.decode(responseData.body);
-        // print(map);
-        // data=map['name'];
-        // map['surname'];
-        // print("namaaa " + map['name'] + map['surname']);
-        // data = map['aplications'];
-      });
+      print(map['name']+map['surname']+map['email']);
     }
   }
 
@@ -233,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             print("Card Tapped");
                           },
-                          child: SizedBox(
+                          child: map!=null?SizedBox(
                             child: Expanded(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -257,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         TextSpan(
                                             text:
-                                                "map['email']!=null?map['email']:''"),
+                                                map['email']),
                                       ],
                                     ),
                                   ),
@@ -281,7 +272,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         TextSpan(
                                             text:
-                                                "map['territorial']!=null?map['territorial']:''"),
+                                                map['territorial']),
                                       ],
                                     ),
                                   ),
@@ -305,14 +296,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         TextSpan(
                                             text:
-                                                "map['territorial']!=null?map['territorial']:''"),
+                                                map['department']),
                                       ],
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
+                          ):Center(child: CircularProgressIndicator()),
                         ),
                       ),
                     ),

@@ -5,6 +5,7 @@ import 'package:generali/Volver.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 String finalToken;
 
@@ -78,6 +79,23 @@ class _CategoryOneState extends State<CategoryOne> {
                                 builder: (context) => Volver(
                                       id: data[index]['id'],
                                     )));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Data not available'),
+                               
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
                       }
                     },
                     child: Card(
@@ -168,11 +186,16 @@ class _CategoryOneState extends State<CategoryOne> {
                                   ],
                                 ),
                               ),
-                              for (int i = 0; i < 5; i++)
-                                Container(
-                                    margin: EdgeInsets.only(bottom: 5),
-                                    child: Icon(Icons.star,
-                                        size: 14, color: Colors.yellow))
+                              Container(
+                                margin: EdgeInsets.only(bottom: 10, left: 20),
+                                child: SmoothStarRating(
+                                  isReadOnly: true,
+                                  size: 14,
+                                  rating: data[index]['rating'].toDouble(),
+                                  borderColor: Colors.yellow,
+                                  color: Colors.yellow,
+                                ),
+                              )
                             ],
                           ),
                         ],
