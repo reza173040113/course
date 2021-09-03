@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ListNewsCard extends StatelessWidget {
@@ -40,8 +41,6 @@ class _NewsCardState extends State<NewsCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 220,
-            height: 110,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
@@ -50,8 +49,25 @@ class _NewsCardState extends State<NewsCard> {
                 alignment: Alignment.topCenter,
               ),
             ),
-            // Text('Entry ${entries[index]}'),
           ),
+          // CachedNetworkImage(
+          //   imageUrl: widget.image,
+          //   imageBuilder: (context, imageProvider) => Container(
+          //     width: 220,
+          //     height: 110,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       image: DecorationImage(
+          //         image: imageProvider,
+          //         fit: BoxFit.cover,
+          //       ),
+          //     ),
+          //   ),
+          //   placeholder: (context, url) => CircularProgressIndicator(),
+          //   errorWidget: (context, url, error) => Icon(Icons.error),
+          // ),
+          // // Text('Entry ${entries[index]}'),
+
           Container(
               padding: EdgeInsets.only(left: 8, top: 8, bottom: 10),
               width: 220,

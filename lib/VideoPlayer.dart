@@ -41,7 +41,7 @@ class _VideoAppState extends State<VideoApp> {
             : Container(),
       ),
       Positioned(
-        top: 70,
+        top: 340,
         left: 160,
         child: FloatingActionButton(
           backgroundColor:

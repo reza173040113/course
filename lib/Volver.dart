@@ -74,9 +74,9 @@ class _VolverState extends State<Volver> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    // child: Image.network(
-                    //     "https://images.unsplash.com/photo-1568292342316-60aa3d36f4b3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FscGFwZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
-                    child: VideoApp(),
+                    child: Image.network(
+                        "https://images.unsplash.com/photo-1568292342316-60aa3d36f4b3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FscGFwZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
+                    // child: VideoApp(),
                   ),
                 ),
                 // Container(
@@ -303,6 +303,15 @@ class _VolverState extends State<Volver> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                children: [
+                                  for (int i = 0; i < 5; i++)
+                                    Container(
+                                        margin: EdgeInsets.only(bottom: 5),
+                                        child: Icon(Icons.star,
+                                            size: 14, color: Colors.yellow))
+                                ],
+                              ),
                               for (int i = 1; i <= 5; i++)
                                 Container(
                                   margin: EdgeInsets.all(10),
@@ -314,6 +323,27 @@ class _VolverState extends State<Volver> {
                                         fontSize: 15,
                                       )),
                                 ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => VideoApp()));
+                                },
+                                child: Container(
+                                  width: 150,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.red[900],
+                                  ),
+                                  child: Center(
+                                      child: Text("Accede al soporte",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ))),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -485,9 +515,17 @@ class _VolverState extends State<Volver> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Center(
-                              child: Text("Entrar",
-                                  style: TextStyle(color: Colors.white))),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => VideoApp()));
+                            },
+                            child: Center(
+                                child: Text("Entrar",
+                                    style: TextStyle(color: Colors.white))),
+                          ),
                           Image.asset(
                             "images/App_Assets/right-nav-active.png",
                             width: 8,
